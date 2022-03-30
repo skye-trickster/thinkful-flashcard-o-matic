@@ -73,15 +73,15 @@ If you are having problems running `npm start` on Windows, you may need to run t
 
 You are tasked with building a number of different screens for the users of the flashcard app, as summarized below:
 
-|    Screen   |                Path               |                                                                      Description                                                                      |   |   |
-|:-----------|:---------------------------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------|---|---|
-| Home        | `/`                                 | Shows a list of decks with options to create, study, view, or delete a deck                                                                           |   |   |
-| Study       | `/decks/:deckId/study`              | Allows the user to study the cards from a specified deck                                                                                              |   |   |
-| Create Deck | `/decks/new`                        | Allows the user to create a new deck                                                                                                                  |   |   |
+|    Screen   |                Path               |                                                                      Description                                                                      |
+|:-----------|:---------------------------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------|
+| Home        | `/`                                 | Shows a list of decks with options to create, study, view, or delete a deck                                                                           |
+| Study       | `/decks/:deckId/study`              | Allows the user to study the cards from a specified deck                                                                                              |  
+| Create Deck | `/decks/new`                        | Allows the user to create a new deck                                                                                                                  |
 | Deck        | `/decks/:deckId`                    | Shows all of the information about a specified deck with options to  edit or add cards to the deck, navigate to the study screen, or delete  the deck |   |   |
-| Edit Deck   | `/decks/:deckId/edit`               | Allows the user to modify information on an existing deck                                                                                             |   |   |
-| Add Card    | `/decks/:deckId/cards/new`          | Allows the user to add a new card to an existing deck                                                                                                 |   |   |
-| Edit Card   | `/decks/:deckId/cards/:cardId/edit` | Allows the user to modify information on an existing card                                                                                             |   |   |
+| Edit Deck   | `/decks/:deckId/edit`               | Allows the user to modify information on an existing deck                                                                                             |
+| Add Card    | `/decks/:deckId/cards/new`          | Allows the user to add a new card to an existing deck                                                                                                 |
+| Edit Card   | `/decks/:deckId/cards/:cardId/edit` | Allows the user to modify information on an existing card                                                                                             |
 
 All of the screens above will work on two common datasets. The datasets are related, and at times, you will need to work with both datasets to get the screens to work properly.
 
