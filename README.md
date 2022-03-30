@@ -22,6 +22,7 @@
     2. [Edit Deck](#edit-deck)
     3. [Add Card](#add-card)
     4. [Edit Card](#edit-card)
+8. [Additional Passing Requirements](#additional-passing-requirements)
 
 ## Introduction
 
@@ -318,3 +319,16 @@ The Edit Card screen has the following features:
 - If the user clicks on either **Save** or **Cancel**, the user is taken to the Deck screen.
 
 **Note**: In addition to needing to pass the tests and requirements in the instructions here, please review the Rubric Requirements for the human-graded part of this project in your Thinkful curriculum page.
+
+## Additional Passing Requirements
+
+For your project to pass, all of the following statements must be true. These criteria are reflected in the rubric in the following lesson.
+
+- All tests are passing in Qualified.
+- All the props are treated as read-only.
+- State is never directly mutated; it's only updated via `setState()`.
+- The Edit Card and Create Card screens share the same form component.
+- The `useEffect()` hooks have the appropriate dependencies listed in the dependency array.
+- State is "lifted up" to the parent component where appropriate.
+- All inputs are controlled. Generally, there is a warning on the console when you type into the input box and it changes from uncontrolled to controlled. The warning looks like this: 
+    - "Warning: Input is changing an uncontrolled input of type <text|number|etc.> to be controlled." This is often the result of initializing the state to `null` or `undefined`.
