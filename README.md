@@ -1,5 +1,30 @@
 # Project: Flashcard-o-matic
 
+## Table of Contents
+1. [Introduction](#introduction)
+2. [Project Setup](#project-setup)
+3. [Running on Windows](#running-on-windows)
+4. [Instructions](#instructions)
+5. [API](#api)
+    1. [Decks](#decks)
+    2. [Cards](#cards)
+    3. [Ultility Functions](#utility-functions)
+6. [Screens](#screens)
+    1. [Home](#home)
+        1. [Delete Deck Prompt](#delete-deck-prompt)
+    2. [Study](#study)
+        1. [Next Button](#next-button)
+        2. [Restart Button](#restart-prompt)
+        3. [Not enough cards](#not-enough-cards)
+    3. [Create Deck](#create-deck)
+7. [Deck](#deck)
+    1. [Delete Card Prompt](#delete-card-prompt)
+    2. [Edit Deck](#edit-deck)
+    3. [Add Card](#add-card)
+    4. [Edit Card](#edit-card)
+
+## Introduction
+
 A local school has decided to put together a flashcard application, Flashcard-o-matic, to help their students study online. Teachers will use this application to create decks of flashcards for the subjects they teach, and students will study the decks. The school needs you to build the application that the students and teachers will use.
 
 ![Flashcard example](https://res.cloudinary.com/strive/image/upload/w_1000,h_1000,c_limit/8ad6e17b7d849280a619e4bb69c26baa-home.png)
