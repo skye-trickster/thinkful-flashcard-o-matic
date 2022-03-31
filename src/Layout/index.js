@@ -3,6 +3,7 @@ import {Switch, Route} from "react-router-dom";
 import Header from "./Header";
 import NotFound from "./NotFound";
 import Home from "./Home"
+import CreateDeck from "./CreateDeck";
 
 function Layout() {
   return (
@@ -10,6 +11,10 @@ function Layout() {
       <Header />
       <div className="container">
         <Switch>
+          <Route path="/decks/new">
+            <CreateDeck />
+          </Route>
+
           <Route exact path="/">
             <Home />
           </Route>
