@@ -1,8 +1,10 @@
 import React from "react";
+import {Link} from "react-router-dom";
 
+function DeckPreview({deck = {}, deleteFunction = (id) => {}}) {   
 
-function DeckPreview({deck = {}})
-{   
+    function deleteHandler () { deleteFunction(deck.id) }
+
     return (
         <div className="card p-2 mt-2">
             <div className="d-flex justify-content-between">
@@ -13,21 +15,21 @@ function DeckPreview({deck = {}})
             <p>{deck.description}</p>
             <div className="d-flex justify-content-between">
                 <div>
-                    <button type="button" className="mr-2 btn btn-secondary bi-eye-fill"> View</button>
-                    <button type="button" className="btn btn-primary bi-journal-bookmark-fill"> Study</button>
+                    <Link to={`/decks/${deck.id}`} type="button" className="mr-2 btn btn-secondary bi-eye-fill"> View</Link>
+                    <Link to={`/decks/${deck.id}/study`} type="button" className="btn btn-primary bi-journal-bookmark-fill"> Study</Link>
                 </div>
-                <button type="button" className="btn btn-danger bi-trash-fill"></button>
+                <button onClick={deleteHandler} type="button" className="btn btn-danger bi-trash-fill"></button>
             </div>
         </div>
     )
 }
 
-function DeckListPreview({deckList = []})
-{
+function DeckListPreview({deckList = [], deleteFunction = (id) => {}}) {
 
     const preview = deckList.map((deck, index) => {
-        return <DeckPreview key={index} deck={deck} />
+        return <DeckPreview key={index} deck={deck} deleteFunction={deleteFunction} />
     });
+
     return (
         <div>
             {!deckList.length ? "Loading..." : preview}
