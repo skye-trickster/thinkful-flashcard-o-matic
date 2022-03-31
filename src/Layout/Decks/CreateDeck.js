@@ -1,7 +1,6 @@
 import React, {useState} from "react";
 
-
-function CreateDeck() {
+function CreateDeck({createFunction, cancelFunction}) {
     const defaultData = {
         name: "",
         description: ""
@@ -17,14 +16,13 @@ function CreateDeck() {
     }
 
     function submitHandler (event) {
-        event.preventDefault()
-        console.log(formData)
+        event.preventDefault();
+        createFunction(formData);
     }
 
     function cancelHandler (event) {
         event.preventDefault()
-        if (window.confirm("Are you sure that you want to cancel?"))
-            console.log("cancelling");
+        cancelFunction()
     }
 
     return (
