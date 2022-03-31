@@ -7,7 +7,7 @@ function DeckPreview({deck = {}})
         <div className="card p-2 mt-2">
             <div className="d-flex justify-content-between">
                 <h3 className="large">{deck.name}</h3>
-                <p>3 cards</p>
+                <p>{deck.cards.length} {`card${ deck.cards.length === 1 ? "" : "s"}`}</p>
             </div>
 
             <p>{deck.description}</p>
@@ -24,15 +24,13 @@ function DeckPreview({deck = {}})
 
 function DeckListPreview({deckList = []})
 {
-    console.log(deckList)
 
     const preview = deckList.map((deck, index) => {
-        console.log(deck)
         return <DeckPreview key={index} deck={deck} />
     });
     return (
         <div>
-            {preview}
+            {!deckList.length ? "Loading..." : preview}
         </div>
     )
 }
