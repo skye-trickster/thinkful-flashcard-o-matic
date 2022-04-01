@@ -13,6 +13,8 @@ function DeckNav ({id="", deck=""}) {
     const link = (path, name) => {return {"path": path, "name": name, "disabled": false}}
 
     const getNav = () => {
+        /// TODO: get the navigation by going BACKWARDS in the location, stopping at decks.
+        
         const links = []
 
         if (deck) { links.push(link(`/decks/${id}`, deck))}

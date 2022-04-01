@@ -1,10 +1,9 @@
 import React, {useEffect, useState} from "react";
 import {listDecks} from "../utils/api/index"
 import DeckListPreview from "./DeckListPreview"
-import {Link, useHistory} from "react-router-dom"
+import {Link} from "react-router-dom"
 import {requestDeckDelete} from "./Common/Functions"
 function Home() {
-    const history = useHistory()
     const [deckList, setDecks] = useState([])
 
     useEffect(() => {
@@ -28,7 +27,10 @@ function Home() {
 
     async function deleteDeck(deckId) {
         const response = await requestDeckDelete(deckId)
-        history.go(0)
+        
+        const deckListTemp = deckList.filter((deckItem) => deckItem.id !== deckId)
+        setDecks(deckListTemp)
+
         return response;
     }
 
