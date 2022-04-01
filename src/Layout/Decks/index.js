@@ -1,38 +1,21 @@
-import React, {useEffect, useState} from "react"
+import React from "react"
+import { Route, Switch, useRouteMatch, useHistory } from "react-router-dom"
+import {createDeck} from "../../utils/api"
+
 import NotFound from "../NotFound"
 import CreateDeck from "./CreateDeck"
-import { Route, Switch, useRouteMatch, useHistory } from "react-router-dom"
-import {createDeck, readDeck} from "../../utils/api"
+import Deck from "./Deck"
 
 function DecksLayout() {
     const history = useHistory();
     const route = useRouteMatch();
-    const [deckId, setDeckId] = useState(null)
-    const [deck, setDeck] = useState({})
 
-    useEffect(() => {
-
-        async function loadDeck() {
-            try {
-                if (deckId !== null) {
-                    console.log("deck ID: ", deckId)
-                    const _deck = await readDeck(deckId)
-                    setDeck(_deck)
-                }
-            } catch (error) {
-                console.log(error.name)
-                throw error
-            }
-        }
-        loadDeck();
-    }, [deckId])
-
-    const Home = () => history.push("/")
+    const GoToDeck = (id) => history.push(`${route.url}/${id}`)
+    const Home = () => history.push(`/`)
 
     async function create(deck, redirect=true) {
         const { id } = await createDeck(deck)
-        setDeckId(id)
-        if (redirect) Home();
+        if (redirect) GoToDeck(id);
     }
 
     async function cancel() {
@@ -45,6 +28,10 @@ function DecksLayout() {
             <Switch>
                 <Route path={`${route.url}/new`}>
                     <CreateDeck createFunction={create} cancelFunction={cancel}/>
+                </Route>
+
+                <Route path={`${route.url}/:deckid`}>
+                    <Deck />
                 </Route>
 
                 <Route>
