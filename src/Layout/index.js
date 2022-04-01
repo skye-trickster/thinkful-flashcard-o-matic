@@ -3,7 +3,7 @@ import {Switch, Route} from "react-router-dom";
 import Header from "./Header";
 import NotFound from "./NotFound";
 import Home from "./Home"
-import DecksLayout from "./Decks";
+import DeckLayout from "./DeckLayout";
 
 function Layout() {
   return (
@@ -12,7 +12,7 @@ function Layout() {
       <div className="container">
         <Switch>
           <Route path="/decks">
-            <DecksLayout />
+            <DeckLayout />
           </Route>
 
           <Route exact path="/">

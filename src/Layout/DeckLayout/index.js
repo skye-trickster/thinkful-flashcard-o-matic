@@ -7,7 +7,7 @@ import CreateDeck from "./CreateDeck"
 import Deck from "./Deck"
 import {requestDeckDelete} from "../Common/Functions"
 
-function DecksLayout() {
+function DeckLayout() {
     const history = useHistory();
     const route = useRouteMatch();
 
@@ -50,4 +50,4 @@ function DecksLayout() {
     )
 }
 
-export default DecksLayout;
+export default DeckLayout;
