@@ -1,4 +1,5 @@
 import React from "react"
+import { Edit } from "../Common/Buttons"
 
 function Card({card = {}}) {
     return (
@@ -8,7 +9,7 @@ function Card({card = {}}) {
                 <p className="text-secondary col-6">{card.back}</p>
             </div>
             <div className="d-flex justify-content-end">
-                <button className="m-2 btn btn-secondary bi-pencil-fill"> Edit</button>
+                <Edit className="m-2"/>
                 <button className="m-2 btn btn-danger bi-trash-fill" />
             </div>
         </div>

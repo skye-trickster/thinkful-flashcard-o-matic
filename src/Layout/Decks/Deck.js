@@ -4,9 +4,9 @@ import {readDeck} from "../../utils/api"
 
 import NotFound from "../NotFound"
 import CardList from "./CardList"
-import {Study, Edit, DeleteDeck} from "../Common/Buttons"
+import {Study, Edit, Delete} from "../Common/Buttons"
 
-function Deck() {
+function Deck({deleteFunction = () => {}}) {
     const [deck, setDeck] = useState({})
     const [error, setError] = useState(null)
     const {deckid} = useParams();
@@ -16,7 +16,6 @@ function Deck() {
             try {
                 if (deckid !== null) {
                     const _deck = await readDeck(deckid)
-                    console.log("deck: ", _deck)
                     setDeck(_deck)
                 }
             } catch (_error) {
@@ -43,7 +42,7 @@ function Deck() {
                         <Study to="/" className="mr-2" />
                         <Link to="/" className="btn btn-primary bi-plus"> Add Cards</Link>
                     </div>
-                    <DeleteDeck to="/" id={deckid} />
+                    <Delete deleteFunction={deleteFunction} to="/" id={deckid}/>
 
                 </div>
 

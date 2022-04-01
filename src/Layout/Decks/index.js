@@ -5,6 +5,7 @@ import {createDeck} from "../../utils/api"
 import NotFound from "../NotFound"
 import CreateDeck from "./CreateDeck"
 import Deck from "./Deck"
+import {requestDeckDelete} from "../Common/Functions"
 
 function DecksLayout() {
     const history = useHistory();
@@ -23,6 +24,12 @@ function DecksLayout() {
             Home();
     }
 
+    async function deleteDeck(deckid, to) {
+        const response = await requestDeckDelete(deckid)
+        history.push(to)
+        return response
+    }
+
     return (
         <>
             <Switch>
@@ -31,7 +38,7 @@ function DecksLayout() {
                 </Route>
 
                 <Route path={`${route.url}/:deckid`}>
-                    <Deck />
+                    <Deck deleteFunction={deleteDeck}/>
                 </Route>
 
                 <Route>
