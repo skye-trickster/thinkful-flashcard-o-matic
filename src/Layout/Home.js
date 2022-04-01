@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from "react";
-import {listDecks, deleteDeck} from "../utils/api/index"
+import {listDecks} from "../utils/api/index"
 import DeckListPreview from "./DeckListPreview"
 import {Link, useHistory} from "react-router-dom"
-
+import {requestDeckDelete} from "./Common/Functions"
 function Home() {
     const history = useHistory()
     const [deckList, setDecks] = useState([])
@@ -26,18 +26,16 @@ function Home() {
         return () => abortC.abort()
     }, [])
 
-    async function requestDeckDelete(deckId) {
-        const abortController = new AbortController()
-        if(window.confirm("Are you sure that you want to delete this deck?")) {
-            await deleteDeck(deckId, abortController.signal)
-            history.go(0)
-        }
+    async function deleteDeck(deckId) {
+        const response = await requestDeckDelete(deckId)
+        history.go(0)
+        return response;
     }
 
     return (
         <>
             <Link to="/decks/new" className="btn btn-secondary bi-plus-lg"> Create Deck</Link>
-            <DeckListPreview deckList={deckList} deleteFunction={requestDeckDelete}/>
+            <DeckListPreview deckList={deckList} deleteFunction={deleteDeck}/>
         </>
     )
 }

@@ -1,9 +1,9 @@
 import React from "react";
 import {Link} from "react-router-dom";
 
-function DeckPreview({deck = {}, deleteFunction = (id) => {}}) {   
+import {Study, Delete} from "./Common/Buttons"
 
-    function deleteHandler () { deleteFunction(deck.id) }
+function DeckPreview({deck = {}, deleteFunction = (id) => {}}) {   
 
     return (
         <div className="card p-2 mt-2">
@@ -15,10 +15,11 @@ function DeckPreview({deck = {}, deleteFunction = (id) => {}}) {
             <p>{deck.description}</p>
             <div className="d-flex justify-content-between">
                 <div>
+
                     <Link to={`/decks/${deck.id}`} type="button" className="mr-2 btn btn-secondary bi-eye-fill"> View</Link>
-                    <Link to={`/decks/${deck.id}/study`} type="button" className="btn btn-primary bi-journal-bookmark-fill"> Study</Link>
+                    <Study to={`/decks/${deck.id}/study`} type="button" className="mr-2" />
                 </div>
-                <button onClick={deleteHandler} type="button" className="btn btn-danger bi-trash-fill"></button>
+                <Delete deleteFunction={deleteFunction} to="/index.html" id={deck.id}/>
             </div>
         </div>
     )
