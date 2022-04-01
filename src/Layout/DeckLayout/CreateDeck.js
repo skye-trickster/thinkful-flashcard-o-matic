@@ -1,12 +1,8 @@
 import React, {useState} from "react";
 
-function CreateDeck({createFunction, cancelFunction}) {
-    const defaultData = {
-        name: "",
-        description: ""
-    }
+function CreateDeck({createFunction, cancelFunction, data={"name":"", "description":""}}) {
 
-    const [formData, setFormData] = useState(defaultData)
+    const [formData, setFormData] = useState(data)
     
     function updateData (event) {
         setFormData({

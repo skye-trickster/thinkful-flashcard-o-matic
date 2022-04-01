@@ -26,7 +26,7 @@ function DeckNav ({id="", deck=""}) {
     }
 
     return (
-        <div className="bg-light p-3">
+        <div className="bg-light p-3 mb-2">
             <NavLink name="Home" to="/" className="bi-house-door-fill"/> 
             {getNav().map(({name, path, disabled}, index) => ( <span key={index}> / <NavLink name={name} to={path} disabled={disabled} /></span>))}
         </div>
