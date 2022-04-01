@@ -4,6 +4,7 @@ import {readDeck} from "../../utils/api"
 
 import NotFound from "../NotFound"
 import CardList from "./CardList"
+import {Study, Edit, DeleteDeck} from "../Common/Buttons"
 
 function Deck() {
     const [deck, setDeck] = useState({})
@@ -38,14 +39,13 @@ function Deck() {
                 </div>
                 <div className="d-flex justify-content-between">
                     <div className="m-0">
-                        <Link to="/" className="mr-2 btn btn-secondary bi-pencil-fill">Edit</Link>
-                        <Link to="/" className="mr-2 btn btn-primary bi-journal-bookmark-fill">Study</Link>
+                        <Edit to="/" className="mr-2" />
+                        <Study to="/" className="mr-2" />
                         <Link to="/" className="btn btn-primary bi-plus"> Add Cards</Link>
                     </div>
-                    <button onClick={() => console.log("deleting")} type="button" className="btn btn-danger bi-trash-fill" />
+                    <DeleteDeck to="/" id={deckid} />
 
                 </div>
-
 
                 <CardList cards={deck.cards}/>
 
