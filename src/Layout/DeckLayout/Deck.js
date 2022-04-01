@@ -1,36 +1,19 @@
 import React, {useState, useEffect} from "react"
-import {useParams, Link} from "react-router-dom"
+import {useParams, Link, Switch, Route} from "react-router-dom"
 import {readDeck} from "../../utils/api"
 
 import NotFound from "../NotFound"
 import CardList from "./CardList"
 import {Study, Edit, Delete} from "../Common/Buttons"
+import DeckNav from "./DeckNav"
+import { useRouteMatch } from "react-router-dom"
 
-function Deck({deleteFunction = () => {}}) {
-    const [deck, setDeck] = useState({})
-    const [error, setError] = useState(null)
-    const {deckid} = useParams();
-
-    useEffect(() => {
-        async function _loadDeck() {
-            try {
-                if (deckid !== null) {
-                    const _deck = await readDeck(deckid)
-                    setDeck(_deck)
-                }
-            } catch (_error) {
-                if (_error.name !== "AbortError")
-                    setError(_error)
-            }
-        }
-        _loadDeck();
-    }, [deckid])
-
-    if (error) { return <NotFound /> }
-
+function DeckDisplay({deck, deleteFunction = () => {}})
+{
     return (
         <>
             { deck ? (
+
             <div>
                 <div>
                     <h3>{deck.name}</h3>
@@ -42,7 +25,7 @@ function Deck({deleteFunction = () => {}}) {
                         <Study to="/" className="mr-2" />
                         <Link to="/" className="btn btn-primary bi-plus"> Add Cards</Link>
                     </div>
-                    <Delete deleteFunction={deleteFunction} to="/" id={deckid}/>
+                    <Delete deleteFunction={deleteFunction} to="/" id={deck.id}/>
 
                 </div>
 
@@ -57,5 +40,43 @@ function Deck({deleteFunction = () => {}}) {
 
     );
 }
+
+function Deck({deleteFunction = () => {}}) {
+    const [deck, setDeck] = useState({})
+    const [error, setError] = useState(null)
+    const params = useParams();
+    const route = useRouteMatch()
+
+    console.log(params, route)
+    useEffect(() => {
+        async function _loadDeck() {
+            try {
+                if (params.deckid !== null) {
+                    const _deck = await readDeck(params.deckid)
+                    setDeck(_deck)
+                }
+            } catch (_error) {
+                if (_error.name !== "AbortError")
+                    setError(_error)
+            }
+        }
+        _loadDeck();
+    }, [params.deckid])
+
+    if (error || ! deck) { return <NotFound /> }
+
+    return (
+        <>
+            <DeckNav id={deck.id} deck={deck.name}/>
+            <Switch>
+                <Route exact path={route.path}>
+                    <DeckDisplay deck={deck} deleteFunction={deleteFunction} />
+                </Route>
+            </Switch>
+        </>
+
+    );
+}
+
 
 export default Deck;
