@@ -38,7 +38,7 @@ function DeckLayout() {
                 </Route>
 
                 <Route path={`${route.url}/:deckid`}>
-                    <Deck deleteFunction={deleteDeck}/>
+                    <Deck deleteFunction={deleteDeck} cancelFunction={GoToDeck}/>
                 </Route>
 
                 <Route>
