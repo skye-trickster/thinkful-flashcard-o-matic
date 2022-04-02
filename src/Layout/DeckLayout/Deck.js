@@ -10,27 +10,30 @@ import CardLayout from "../CardLayout"
 
 function Deck({deleteFunction = () => {}, cancelFunction}) {
     const [deck, setDeck] = useState({})
+
     const [error, setError] = useState(null)
-    const params = useParams();
+
+    const {deckid} = useParams();
+
     const route = useRouteMatch()
 
-    useEffect(() => {
-        async function _loadDeck() {
-            try {
-                if (params.deckid !== null) {
-                    const _deck = await readDeck(params.deckid)
-                    setDeck(_deck)
-                }
-            } catch (_error) {
-                if (_error.name !== "AbortError")
-                    setError(_error)
+    async function loadDeck() {
+        try {
+            if (deckid !== null) {
+                const _deck = await readDeck(deckid)
+                setDeck(_deck)
             }
+        } catch (_error) {
+            if (_error.name !== "AbortError")
+                setError(_error)
         }
-        _loadDeck();
-    }, [params.deckid])
+    }
 
+    useEffect(() => {loadDeck()}, [deckid])
 
     if (error || ! deck) { return <NotFound /> }
+    
+    const returnToView = () => cancelFunction(deckid)
 
     return (
         <>
@@ -40,11 +43,11 @@ function Deck({deleteFunction = () => {}, cancelFunction}) {
                     <DeckDisplay deck={deck} deleteFunction={deleteFunction} />
                 </Route>
                 <Route path={`${route.path}/edit`}>
-                    <DeckEdit updateDeck={setDeck} returnToViewFunction={() => cancelFunction(deck.id)} deck={deck}/>
+                    <DeckEdit updateDeck={setDeck} returnToViewFunction={returnToView} deck={deck}/>
                 </Route>
 
                 <Route path={`${route.path}/cards`}>
-                    <CardLayout deck={deck} />
+                    <CardLayout deck={deck} deckRefreshMethod={loadDeck} returnToDeck={returnToView} />
                 </Route>
             </Switch>
         </>

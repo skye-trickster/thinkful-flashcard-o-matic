@@ -2,12 +2,20 @@ import React from "react";
 
 import CardForm from "./CardForm"
 
-function CreateDeck({createFunction, cancelFunction, deckName}) {
+function CreateDeck({createFunction, cancelFunction, deck}) {
 
+    function submitHandler(card)
+    {
+        console.log(deck.id)
+        createFunction({
+            ...card,
+            "deckId" : deck.id
+        })
+    }
     return (
         <div>
-            <h1>{deckName}: Add Card</h1>
-            <CardForm submitFunction={createFunction} cancelFunction={cancelFunction}/>
+            <h1>{deck.name}: Add Card</h1>
+            <CardForm submitFunction={submitHandler} cancelFunction={cancelFunction}/>
         </div>
     );
 }

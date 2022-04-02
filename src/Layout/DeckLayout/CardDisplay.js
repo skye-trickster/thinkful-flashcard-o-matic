@@ -1,7 +1,7 @@
 import React from "react"
 import { Edit } from "../Common/Buttons"
 
-function Card({card = {}, routeBase=""}) {
+function CardDisplay({card = {}, routeBase=""}) {
     return (
         <div className="p-2 border">
             <div className="d-flex justify-content-between">
@@ -16,4 +16,4 @@ function Card({card = {}, routeBase=""}) {
     )
 }
 
-export default Card;
+export default CardDisplay;

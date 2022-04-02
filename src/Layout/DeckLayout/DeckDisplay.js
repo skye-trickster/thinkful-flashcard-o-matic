@@ -1,5 +1,5 @@
 import React from "react"
-import CardList from "./CardList"
+import CardList from "./CardListDisplay"
 import {Study, Edit, Delete} from "../Common/Buttons"
 import {Link, useRouteMatch} from "react-router-dom"
 
