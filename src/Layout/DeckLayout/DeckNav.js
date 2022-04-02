@@ -16,15 +16,23 @@ function DeckNav ({id="", deck=""}) {
     const getNav = () => {
         const pathitems = pathname.split('/')
 
-        const links = []
-        pathitems.reverse().forEach((pathNode, index) => {
+        let links = []
 
-            const getPath = (next = false) => pathitems.slice(0, next ? index + 1 : index).reverse().join('/')
+        pathitems.forEach((pathNode, index) => {
 
-            if(pathNode === "") return
-            
-            if(pathNode === "decks")
-                links.push(createLink(getPath(true), deck))
+            const getPath = (pullid = false) => {
+                const pullAmount = pullid ? 1 : 0
+                return `${pathitems.slice(0, index + 1 + pullAmount).join("/")}`
+            }
+
+            switch(pathNode)
+            {
+                case "decks":
+                    links.push(createLink(getPath(true), deck))
+                    break;
+                case "edit":
+                    links.push(createLink(getPath(), "Edit"))
+            }
         })
 
         links[links.length - 1] = {
