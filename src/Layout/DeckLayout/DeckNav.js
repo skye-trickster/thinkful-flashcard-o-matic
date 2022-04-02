@@ -3,9 +3,8 @@ import {Link, useLocation} from "react-router-dom"
 
 function NavLink({name, to, className="", disabled=false}) {
     
-    const style = disabled ? {"pointerEvents":"none"} : {}
-    const colorOverride = disabled ? "text-secondary" : ""
-    return <Link to={to} style={style} className={`${className} ${colorOverride}`}>{name}</Link>
+    const colorOverride = disabled ? "disabled" : "text-primary"
+    return <Link to={to} className={`p-0 mr-1 ml-1 btn ${className} ${colorOverride}`}>{name}</Link>
 }
 
 function DeckNav ({id="", deck=""}) {
@@ -47,9 +46,15 @@ function DeckNav ({id="", deck=""}) {
     }
 
     return (
-        <div className="bg-light p-3 mb-2">
+        <div className="bg-light p-3 mb-2 d-flex">
             <NavLink name="Home" to="/" className="bi-house-door-fill"/> 
-            {getNav().map(({name, path, disabled}, index) => ( <span key={index}> / <NavLink name={name} to={path} disabled={disabled} /></span>))}
+            {
+                getNav().map(({name, path, disabled}, index) => (
+                    <React.Fragment key={index}>
+                        <span>{` / `}</span>
+                        <NavLink name={name} to={path} disabled={disabled} />
+                    </React.Fragment>
+                ))}
         </div>
     )
 }
