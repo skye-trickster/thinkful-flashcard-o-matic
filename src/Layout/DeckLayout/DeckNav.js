@@ -17,6 +17,7 @@ function DeckNav ({id="", deck=""}) {
 
         let links = []
 
+        let skipNext = false
         pathitems.forEach((pathNode, index) => {
 
             const getPath = (pullid = false) => {
@@ -24,16 +25,18 @@ function DeckNav ({id="", deck=""}) {
                 return `${pathitems.slice(0, index + 1 + pullAmount).join("/")}`
             }
 
+            if (pathNode === "" || skipNext) {
+                skipNext = false
+                return
+            }
             switch(pathNode)
             {
                 case "decks":
                     links.push(createLink(getPath(true), deck))
-                    break;
-                case "edit":
-                    links.push(createLink(getPath(), "Edit"))
-                    break;
+                    skipNext = true
+                    break
                 default:
-                    break;
+                    links.push(createLink(getPath(), pathNode.charAt(0).toUpperCase() + pathNode.slice(1)))
             }
         })
 

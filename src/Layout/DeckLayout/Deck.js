@@ -6,6 +6,7 @@ import NotFound from "../NotFound"
 import DeckDisplay from "./DeckDisplay"
 import DeckNav from "./DeckNav"
 import DeckEdit from "./DeckEdit"
+import CardLayout from "../CardLayout"
 
 function Deck({deleteFunction = () => {}, cancelFunction}) {
     const [deck, setDeck] = useState({})
@@ -40,6 +41,10 @@ function Deck({deleteFunction = () => {}, cancelFunction}) {
                 </Route>
                 <Route path={`${route.path}/edit`}>
                     <DeckEdit updateDeck={setDeck} returnToViewFunction={() => cancelFunction(deck.id)} deck={deck}/>
+                </Route>
+
+                <Route path={`${route.path}/cards`}>
+                    <CardLayout deck={deck} />
                 </Route>
             </Switch>
         </>

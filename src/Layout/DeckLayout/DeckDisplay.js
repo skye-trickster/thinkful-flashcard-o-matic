@@ -1,11 +1,11 @@
 import React from "react"
 import CardList from "./CardList"
 import {Study, Edit, Delete} from "../Common/Buttons"
-import {Link} from "react-router-dom"
+import {Link, useRouteMatch} from "react-router-dom"
 
 function DeckDisplay({deck, deleteFunction = () => {}})
 {
-    const route = `/decks/${deck.id}`
+    const {url} = useRouteMatch()
     return (
         
         <div>
@@ -15,9 +15,9 @@ function DeckDisplay({deck, deleteFunction = () => {}})
             </div>
             <div className="d-flex justify-content-between">
                 <div className="m-0">
-                    <Edit to={`${route}/edit`} className="mr-2" />
-                    <Study to="/" className="mr-2" />
-                    <Link to="/" className="btn btn-primary bi-plus"> Add Cards</Link>
+                    <Edit to={`${url}/edit`} className="mr-2" />
+                    <Study to={`${url}/study`} className="mr-2" />
+                    <Link to={`${url}/cards/new`} className="btn btn-primary bi-plus"> Add Cards</Link>
                 </div>
                 <Delete deleteFunction={deleteFunction} to="/" id={deck.id}/>
 
