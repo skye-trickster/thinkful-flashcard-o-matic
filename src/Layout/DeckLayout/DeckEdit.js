@@ -7,6 +7,8 @@ function DeckEdit({updateDeck, returnToViewFunction, deck}) {
         updateDeck(result)
         returnToViewFunction()
     }
+
+    if (!Object.keys(deck).length) return "Loading..." //don't load the form until the deck is loaded
     return <DeckForm data={deck} edit submitFunction={submitHandler} cancelFunction={returnToViewFunction}/>
 }
 

@@ -32,6 +32,9 @@ function DeckNav ({id="", deck=""}) {
                     break;
                 case "edit":
                     links.push(createLink(getPath(), "Edit"))
+                    break;
+                default:
+                    break;
             }
         })
 
