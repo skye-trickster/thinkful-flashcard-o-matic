@@ -27,7 +27,7 @@ function Home() {
 
     async function deleteDeck(deckId) {
         const response = await requestDeckDelete(deckId)
-        if (response === undefined) return 
+        
         const deckListTemp = deckList.filter((deckItem) => deckItem.id !== deckId)
         setDecks(deckListTemp)
 
