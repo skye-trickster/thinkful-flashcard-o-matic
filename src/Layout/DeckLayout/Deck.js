@@ -1,14 +1,13 @@
 import React, {useState, useEffect} from "react"
-import {useParams, Switch, Route} from "react-router-dom"
+import {useParams, Switch, Route, useRouteMatch} from "react-router-dom"
 import {readDeck} from "../../utils/api"
 
 import NotFound from "../NotFound"
-
 import DeckDisplay from "./DeckDisplay"
 import DeckNav from "./DeckNav"
-import { useRouteMatch } from "react-router-dom"
+import DeckEdit from "./DeckEdit"
 
-function Deck({deleteFunction = () => {}}) {
+function Deck({deleteFunction = () => {}, cancelFunction}) {
     const [deck, setDeck] = useState({})
     const [error, setError] = useState(null)
     const params = useParams();
@@ -29,6 +28,7 @@ function Deck({deleteFunction = () => {}}) {
         _loadDeck();
     }, [params.deckid])
 
+
     if (error || ! deck) { return <NotFound /> }
 
     return (
@@ -37,6 +37,9 @@ function Deck({deleteFunction = () => {}}) {
             <Switch>
                 <Route exact path={route.path}>
                     <DeckDisplay deck={deck} deleteFunction={deleteFunction} />
+                </Route>
+                <Route path={`${route.path}/edit`}>
+                    <DeckEdit updateDeck={setDeck} returnToViewFunction={() => cancelFunction(deck.id)} deck={deck}/>
                 </Route>
             </Switch>
         </>

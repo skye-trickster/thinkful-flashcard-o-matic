@@ -1,46 +1,14 @@
-import React, {useState} from "react";
+import React from "react";
 
 import DeckNav from "./DeckNav"
+import DeckForm from "./DeckForm"
 
-function CreateDeck({createFunction, cancelFunction, data={"name":"", "description":""}}) {
-
-    const [formData, setFormData] = useState(data)
-    
-    function updateData (event) {
-        setFormData({
-            ...formData, 
-            [event.target.name] : event.target.value
-        })
-    }
-
-    function submitHandler (event) {
-        event.preventDefault();
-        createFunction(formData);
-    }
-
-    function cancelHandler (event) {
-        event.preventDefault()
-        cancelFunction()
-    }
+function CreateDeck({createFunction, cancelFunction}) {
 
     return (
         <div>
             <DeckNav deck="Create New"/>
-            <h1>Create Deck</h1>
-            <form onSubmit={submitHandler}>
-                <label className="d-block mb-3" htmlFor="name">
-                    <span className="d-block">Name</span>
-                    <input className="w-100" name="name" type="text" onChange={updateData} value={formData.name} required placeholder="Deck Name"/>
-                </label>
-
-                <label className="d-block mb-3" htmlFor="description">
-                    <span className="d-block">Description</span>
-                    <textarea className="w-100" name="description" onChange={updateData} value={formData.description} type="text" placeholder="Brief description of the deck"/>
-                </label>
-
-                <button onClick={cancelHandler} className="btn btn-secondary mr-3">Cancel</button>
-                <button type="submit" className="btn btn-primary">Submit</button>
-            </form>
+            <DeckForm submitFunction={createFunction} cancelFunction={cancelFunction}/>
         </div>
     );
 }
