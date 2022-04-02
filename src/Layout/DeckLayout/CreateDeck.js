@@ -1,5 +1,7 @@
 import React, {useState} from "react";
 
+import DeckNav from "./DeckNav"
+
 function CreateDeck({createFunction, cancelFunction, data={"name":"", "description":""}}) {
 
     const [formData, setFormData] = useState(data)
@@ -23,6 +25,7 @@ function CreateDeck({createFunction, cancelFunction, data={"name":"", "descripti
 
     return (
         <div>
+            <DeckNav deck="Create New"/>
             <h1>Create Deck</h1>
             <form onSubmit={submitHandler}>
                 <label className="d-block mb-3" htmlFor="name">

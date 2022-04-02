@@ -1,5 +1,5 @@
 import React from "react"
-import {Link} from "react-router-dom"
+import {Link, useLocation} from "react-router-dom"
 
 function NavLink({name, to, className="", disabled=false}) {
     
@@ -9,16 +9,24 @@ function NavLink({name, to, className="", disabled=false}) {
 }
 
 function DeckNav ({id="", deck=""}) {
+    const {pathname} = useLocation()
 
-    const link = (path, name) => {return {"path": path, "name": name, "disabled": false}}
+    const createLink = (path, name) => {return {"path": path, "name": name, "disabled": false}}
 
     const getNav = () => {
-        /// TODO: get the navigation by going BACKWARDS in the location, stopping at decks.
-        
-        const links = []
+        const pathitems = pathname.split('/')
 
-        if (deck) { links.push(link(`/decks/${id}`, deck))}
-        
+        const links = []
+        pathitems.reverse().forEach((pathNode, index) => {
+
+            const getPath = (next = false) => pathitems.slice(0, next ? index + 1 : index).reverse().join('/')
+
+            if(pathNode === "") return
+            
+            if(pathNode === "decks")
+                links.push(createLink(getPath(true), deck))
+        })
+
         links[links.length - 1] = {
             ...links[links.length - 1],
             disabled: true //disable the final link
