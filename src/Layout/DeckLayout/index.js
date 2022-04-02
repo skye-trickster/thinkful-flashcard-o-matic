@@ -26,7 +26,8 @@ function DeckLayout() {
 
     async function deleteDeck(deckid, to) {
         const response = await requestDeckDelete(deckid)
-        history.push(to)
+        if (response !== undefined)
+            history.push(to)
         return response
     }
 
