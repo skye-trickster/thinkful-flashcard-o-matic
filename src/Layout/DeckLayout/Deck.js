@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from "react"
-import {useParams, Link, Switch, Route} from "react-router-dom"
+import {useParams, Switch, Route} from "react-router-dom"
 import {readDeck} from "../../utils/api"
 
 import NotFound from "../NotFound"
@@ -14,7 +14,6 @@ function Deck({deleteFunction = () => {}}) {
     const params = useParams();
     const route = useRouteMatch()
 
-    console.log(params, route)
     useEffect(() => {
         async function _loadDeck() {
             try {
