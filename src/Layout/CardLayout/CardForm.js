@@ -1,6 +1,6 @@
 import React, {useState} from "react"
 
-function CardForm({submitFunction, cancelFunction, data={"front":"", "back":""}, edit=false}) {
+function CardForm({submitFunction, cancelFunction, data={"front":"", "back":""}}) {
     const [formData, setFormData] = useState(data)
     
     function updateData (event) {

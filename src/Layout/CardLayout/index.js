@@ -1,6 +1,6 @@
 import React from "react"
 import {Switch, Route, useRouteMatch} from "react-router-dom"
-import { createCard } from "../../utils/api"
+import { createCard, updateCard } from "../../utils/api"
 import NotFound from "../NotFound"
 import Card from "./Card"
 
@@ -19,6 +19,12 @@ function CardLayout({deck, returnToDeck, deckRefreshMethod}) {
         if (redirect) returnToDeck()
     }
 
+    async function update(card) {
+        await updateCard(card)
+        deckRefreshMethod()
+        returnToDeck()
+    }
+
     return (
         <Switch>
             <Route path={`${url}/new`}>
@@ -26,7 +32,7 @@ function CardLayout({deck, returnToDeck, deckRefreshMethod}) {
             </Route>
 
             <Route path={`${url}/:cardid`}>
-                <Card deck={deck} />
+                <Card updateCardMethod={update} returnToDeckFunction={returnToDeck} deck={deck} />
             </Route>
 
             <Route>

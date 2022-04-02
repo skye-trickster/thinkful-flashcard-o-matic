@@ -1,18 +1,20 @@
 import React, {useState, useEffect} from "react"
-import {useRouteMatch, useParams} from "react-router-dom"
+import {Switch, Route, useRouteMatch, useParams} from "react-router-dom"
 import { readCard } from "../../utils/api";
+import NotFound from "../NotFound";
+import EditCard from "./EditCard";
 
-function Card({deck}) {
+function Card({updateCardMethod=undefined, returnToDeckFunction=undefined}) {
     const [card, setCard] = useState({})
-    const route = useRouteMatch();
+    const {url} = useRouteMatch();
     const {cardid} = useParams();
 
     useEffect(() => {
+        setCard({})
         async function loadCard()  {
             try {
                 if (cardid !== undefined) {
                     const response = await readCard(cardid)
-                    //console.log("response: ", response)
                     setCard(response)
                 }
             } catch (functionError) {
@@ -23,7 +25,21 @@ function Card({deck}) {
         loadCard();
     }, [cardid])
 
-    return null
+    function returnToDeck() {
+        if (returnToDeckFunction)
+            returnToDeckFunction()
+    }
+
+    return (
+        <Switch>
+            <Route path={`${url}/edit`}>
+                <EditCard updateFunction={updateCardMethod} cancelFunction={returnToDeck} card={card}/>
+            </Route>
+            <Route>
+                <NotFound />
+            </Route>
+        </Switch>
+    )
 }
 
 export default Card;

@@ -2,7 +2,7 @@ import React from "react";
 
 import CardForm from "./CardForm"
 
-function CreateDeck({createFunction, cancelFunction, deck}) {
+function CreateCard({createFunction, cancelFunction, deck}) {
 
     function submitHandler(card)
     {
@@ -20,4 +20,4 @@ function CreateDeck({createFunction, cancelFunction, deck}) {
     );
 }
 
-export default CreateDeck;
+export default CreateCard;
