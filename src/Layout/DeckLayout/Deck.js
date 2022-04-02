@@ -8,7 +8,7 @@ import DeckNav from "./DeckNav"
 import DeckEdit from "./DeckEdit"
 import CardLayout from "../CardLayout"
 
-function Deck({deleteFunction = () => {}, cancelFunction}) {
+function Deck({deleteFunction, cancelFunction, deleteCardFunction=undefined}) {
     const [deck, setDeck] = useState({})
 
     const [error, setError] = useState(null)
@@ -35,12 +35,20 @@ function Deck({deleteFunction = () => {}, cancelFunction}) {
     
     const returnToView = () => cancelFunction(deckid)
 
+    async function deleteCard(cardid) {
+        if (!deleteCardFunction) return
+
+        const response = await deleteCardFunction(cardid)
+        if (response !== undefined)
+            loadDeck()
+    }
+
     return (
         <>
             <DeckNav id={deck.id} deck={deck.name}/>
             <Switch>
                 <Route exact path={route.path}>
-                    <DeckDisplay deck={deck} deleteFunction={deleteFunction} />
+                    <DeckDisplay deck={deck} deleteFunction={deleteFunction} deleteCardFunction={deleteCard} />
                 </Route>
                 <Route path={`${route.path}/edit`}>
                     <DeckEdit updateDeck={setDeck} returnToViewFunction={returnToView} deck={deck}/>

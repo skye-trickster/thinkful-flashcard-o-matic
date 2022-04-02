@@ -3,7 +3,7 @@ import CardList from "./CardListDisplay"
 import {Study, Edit, Delete} from "../Common/Buttons"
 import {Link, useRouteMatch} from "react-router-dom"
 
-function DeckDisplay({deck, deleteFunction = () => {}})
+function DeckDisplay({deck, deleteFunction=undefined, deleteCardFunction=undefined})
 {
     const {url} = useRouteMatch()
     return (
@@ -23,7 +23,7 @@ function DeckDisplay({deck, deleteFunction = () => {}})
 
             </div>
 
-            <CardList editRoute={url} cards={deck.cards}/>
+            <CardList editRoute={url} cards={deck.cards} deleteFunction={deleteCardFunction}/>
 
         </div>
 
