@@ -7,7 +7,7 @@ function NavLink({name, to, className="", disabled=false}) {
     return <Link to={to} className={`p-0 mr-1 ml-1 btn ${className} ${colorOverride}`}>{name}</Link>
 }
 
-function DeckNav ({id="", deck=""}) {
+function DeckNav ({deck=""}) {
     const {pathname} = useLocation()
 
     const createLink = (path, name) => {return {"path": path, "name": name, "disabled": false}}
@@ -18,6 +18,10 @@ function DeckNav ({id="", deck=""}) {
         let links = []
 
         let skipNext = false
+        let modifier = ""
+
+        const updateLastLink = (link) => links[links.length - 1] = link
+
         pathitems.forEach((pathNode, index) => {
 
             const getPath = (pullid = false) => {
@@ -25,25 +29,52 @@ function DeckNav ({id="", deck=""}) {
                 return `${pathitems.slice(0, index + 1 + pullAmount).join("/")}`
             }
 
+            const peek = () => pathitems[index + 1]
+
             if (pathNode === "" || skipNext) {
                 skipNext = false
                 return
             }
+
             switch(pathNode)
             {
                 case "decks":
                     links.push(createLink(getPath(true), deck))
                     skipNext = true
                     break
+                case "cards":
+
+                    const modify = (peek() !== "new") //don't modify if next is labelled as new
+
+                    modifier = `Card${modify ? ` ${peek()}` : ""}`
+                    
+                    links.push(createLink(getPath(modify), modifier))
+                    skipNext = modify
+                    return //returns early to avoid skip next check
+                case "new":
+                    if (modifier)
+                        updateLastLink(createLink(getPath(false), `Add ${modifier}`))
+
+                    break;
+                case "edit":
+                    if (modifier) // update the last link to say "edit if last link can be modified"
+                    {
+                        updateLastLink(createLink(getPath(), `Edit ${modifier}`))
+                        modifier = ""
+                        break;
+                    }
+                    //falls through to default
                 default:
-                    links.push(createLink(getPath(), pathNode.charAt(0).toUpperCase() + pathNode.slice(1)))
+                    const linkUpperCase = pathNode.charAt(0).toUpperCase() + pathNode.slice(1)
+                    links.push(createLink(getPath(), linkUpperCase))
             }
+            if (!skipNext) modifier = ""
         })
 
-        links[links.length - 1] = {
+        updateLastLink({
             ...links[links.length - 1],
             disabled: true //disable the final link
-        }
+        })
 
         return links
     }

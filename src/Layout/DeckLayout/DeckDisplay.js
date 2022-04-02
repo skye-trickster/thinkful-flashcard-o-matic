@@ -23,7 +23,7 @@ function DeckDisplay({deck, deleteFunction = () => {}})
 
             </div>
 
-            <CardList cards={deck.cards}/>
+            <CardList editRoute={url} cards={deck.cards}/>
 
         </div>
 
