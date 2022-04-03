@@ -19,11 +19,6 @@ function DeckLayout() {
         if (redirect) GoToDeck(id);
     }
 
-    async function cancel() {
-        if (window.confirm("Are you sure that you want to cancel creating this deck?"))
-            Home();
-    }
-
     async function deleteDeck(deckid, to) {
         const response = await requestDeckDelete(deckid)
         if (response !== undefined)
@@ -39,7 +34,7 @@ function DeckLayout() {
     return (
         <Switch>
             <Route path={`${route.url}/new`}>
-                <CreateDeck createFunction={create} cancelFunction={cancel}/>
+                <CreateDeck createFunction={create} cancelFunction={Home}/>
             </Route>
 
             <Route path={`${route.url}/:deckid`}>
