@@ -7,8 +7,9 @@ import DeckDisplay from "./DeckDisplay"
 import DeckNav from "./DeckNav"
 import DeckEdit from "./DeckEdit"
 import CardLayout from "../CardLayout"
+import StudyLayout from "../StudyLayout"
 
-function Deck({deleteFunction, cancelFunction, deleteCardFunction=undefined}) {
+function Deck({deleteFunction, cancelFunction, homeFunction, deleteCardFunction=undefined}) {
     const [deck, setDeck] = useState({})
 
     const [error, setError] = useState(null)
@@ -63,6 +64,11 @@ function Deck({deleteFunction, cancelFunction, deleteCardFunction=undefined}) {
                 <Route exact path={route.path}>
                     <DeckDisplay deck={deck} deleteFunction={deleteFunction} deleteCardFunction={deleteCard} />
                 </Route>
+
+                <Route path={`${route.path}/study`}>
+                    <StudyLayout deck={deck} addCardLink={`${route.url}/cards/new`} endStudyFunction={homeFunction}/>
+                </Route>
+
                 <Route path={`${route.path}/edit`}>
                     <DeckEdit updateDeck={update} returnToViewFunction={returnToView} deck={deck}/>
                 </Route>
