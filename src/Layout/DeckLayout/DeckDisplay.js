@@ -2,14 +2,14 @@ import React from "react"
 import CardList from "./CardListDisplay"
 import {Study, Edit, Delete} from "../Common/Buttons"
 import {Link, useRouteMatch} from "react-router-dom"
-import ContentLayer from "../Common/Content"
+//import ContentLayer from "../Common/Content"
 
 function DeckDisplay({deck, deleteFunction=undefined, deleteCardFunction=undefined})
 {
     const {url} = useRouteMatch()
     return (
         
-        <ContentLayer>
+        <>
             <div>
                 <h2>{deck.name}</h2>
                 <p>{deck.description}</p>
@@ -26,7 +26,7 @@ function DeckDisplay({deck, deleteFunction=undefined, deleteCardFunction=undefin
 
             <CardList editRoute={url} cards={deck.cards} deleteFunction={deleteCardFunction}/>
 
-        </ContentLayer>
+        </>
 
     );
 }

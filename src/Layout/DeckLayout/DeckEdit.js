@@ -1,5 +1,6 @@
 import React from "react"
-import ContentLayer, { Heading } from "../Common/Content"
+import ContentLayer from "../Common/Content"
+import Heading from "../Common/Heading"
 import DeckForm from "./DeckForm"
 
 function DeckEdit({updateDeck, returnToViewFunction, deck}) {

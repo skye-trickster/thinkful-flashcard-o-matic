@@ -4,19 +4,13 @@ function ContentLayer({children, nav=null}) {
 
     return (
     <React.Fragment>
-        {nav}
+        { nav }
         <div className="content">
-            {children}
+            { children }
         </div>
     </React.Fragment>
 
     )
-}
-
-export function Heading({title=null}) { 
-    return title ?
-    (<h1>{title}</h1>)
-    : null
 }
 
 export default ContentLayer

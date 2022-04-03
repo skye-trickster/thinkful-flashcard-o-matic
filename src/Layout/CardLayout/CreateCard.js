@@ -1,5 +1,6 @@
 import React from "react";
-import ContentLayer, { Heading } from "../Common/Content";
+import ContentLayer from "../Common/Content";
+import Heading from "../Common/Heading";
 
 import CardForm from "./CardForm"
 

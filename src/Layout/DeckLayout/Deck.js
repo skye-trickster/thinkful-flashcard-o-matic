@@ -8,6 +8,7 @@ import DeckNav from "./DeckNav"
 import DeckEdit from "./DeckEdit"
 import CardLayout from "../CardLayout"
 import StudyLayout from "../StudyLayout"
+import ContentLayer from "../Common/Content"
 
 function Deck({deleteFunction, cancelFunction, homeFunction, deleteCardFunction=undefined}) {
     const [deck, setDeck] = useState({})
@@ -57,9 +58,10 @@ function Deck({deleteFunction, cancelFunction, homeFunction, deleteCardFunction=
         setDeck(deck)
     }
 
+    const nav = <DeckNav deck={deck.name}/>
+
     return (
-        <>
-            <DeckNav id={deck.id} deck={deck.name}/>
+        <ContentLayer nav={nav}>
             <Switch>
                 <Route exact path={route.path}>
                     <DeckDisplay deck={deck} deleteFunction={deleteFunction} deleteCardFunction={deleteCard} />
@@ -80,7 +82,7 @@ function Deck({deleteFunction, cancelFunction, homeFunction, deleteCardFunction=
                     <NotFound />
                 </Route>
             </Switch>
-        </>
+        </ContentLayer>
 
     );
 }
