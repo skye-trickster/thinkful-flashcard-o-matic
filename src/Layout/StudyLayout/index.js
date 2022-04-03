@@ -1,5 +1,6 @@
 import React, { useState } from "react"
-import ContentLayer, { Heading } from "../Common/Content"
+import ContentLayer from "../Common/Content"
+import Heading from "../Common/Heading"
 import NotEnoughCards from "./NotEnoughCards"
 import StudyCard from "./StudyCard"
 

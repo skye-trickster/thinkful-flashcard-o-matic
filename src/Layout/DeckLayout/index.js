@@ -15,19 +15,31 @@ function DeckLayout() {
     const Home = () => history.push(`/`)
 
     async function create(deck, redirect=true) {
-        const { id } = await createDeck(deck)
-        if (redirect) GoToDeck(id);
+        
+        const abortController = new AbortController()
+
+        try {
+            const { id } = await createDeck(deck, abortController.signal)
+            if (redirect) GoToDeck(id);
+        } catch (error) {
+            if (error.name !== "AbortError") throw error
+        }
+
+        return () => { abortController.abort() }
+
     }
 
     async function deleteDeck(deckid, to) {
         const response = await requestDeckDelete(deckid)
-        if (response !== undefined)
-            history.push(to)
+
+        if (response !== undefined) history.push(to)
+        
         return response
     }
 
     async function deleteCard(cardid) {
         const response = await requestCardDelete(cardid)
+        
         return response
     }
 

@@ -1,12 +1,12 @@
-import React from "react";
+import React from "react"
 import {Link} from "react-router-dom";
 
-import {Study, Delete} from "./Common/Buttons"
+import {Study, Delete} from "../Common/Buttons"
 
 function DeckPreview({deck = {}, deleteFunction = (id) => {}}) {   
 
     return (
-        <div className="card p-2 mt-2">
+        <div className="deck-preview card p-2 mt-2">
             <div className="d-flex justify-content-between">
                 <h3 className="large">{deck.name}</h3>
                 <p>{deck.cards.length} {`card${ deck.cards.length === 1 ? "" : "s"}`}</p>
@@ -25,19 +25,4 @@ function DeckPreview({deck = {}, deleteFunction = (id) => {}}) {
     )
 }
 
-function DeckListPreview({deckList = [], deleteFunction = (id) => {}}) {
-
-    const preview = deckList.map((deck, index) => {
-        return <DeckPreview key={index} deck={deck} deleteFunction={deleteFunction} />
-    });
-
-    if (!deckList.length) return "Loading.."
-
-    return (
-        <div className="deck-list">
-            {preview}
-        </div>
-    )
-}
-
-export default DeckListPreview;
+export default DeckPreview

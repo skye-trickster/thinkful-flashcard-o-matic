@@ -1,5 +1,6 @@
 import React from "react";
-import ContentLayer, { Heading } from "../Common/Content";
+import ContentLayer from "../Common/Content";
+import Heading from "../Common/Heading";
 
 import CardForm from "./CardForm"
 
@@ -7,7 +8,6 @@ function CreateCard({createFunction, cancelFunction, deck}) {
 
     function submitHandler(card)
     {
-        console.log(deck.id)
         createFunction({
             ...card,
             "deckId" : deck.id
