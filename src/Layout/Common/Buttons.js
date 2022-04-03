@@ -13,3 +13,7 @@ export function Delete({deleteFunction, id, to="/", className=""}) {
     function deleteHandler() { deleteFunction(id, to) }
     return <button onClick={deleteHandler} type="button" className={`btn btn-danger bi-trash-fill ${className}`} />
 }
+
+export function AddCards({to="#"}) {
+    return <Link to={to} className="btn btn-primary bi-plus"> Add Cards</Link>
+}
