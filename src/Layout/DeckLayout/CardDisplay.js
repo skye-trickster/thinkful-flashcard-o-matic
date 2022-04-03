@@ -1,13 +1,12 @@
 import React from "react"
 import { Edit, Delete } from "../Common/Buttons"
 
-function CardDisplay({card = {}, routeBase="", deleteFunction = undefined}) {
+function CardDisplay({ card = {}, routeBase="", deleteFunction }) {
 
     function deleteHandler() {
         if (!card.id) return
-        //console.log(card.id)
-        if (deleteFunction)
-            deleteFunction(card.id)
+
+        deleteFunction(card.id)
     }
 
 

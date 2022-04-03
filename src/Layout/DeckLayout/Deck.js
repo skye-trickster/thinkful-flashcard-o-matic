@@ -72,7 +72,7 @@ function Deck({deleteFunction, cancelFunction, homeFunction, deleteCardFunction=
                 </Route>
 
                 <Route path={`${route.path}/edit`}>
-                    <DeckEdit updateDeck={update} returnToViewFunction={returnToView} deck={deck}/>
+                    <DeckEdit updateFunction={update} returnToViewFunction={returnToView} deck={deck}/>
                 </Route>
 
                 <Route path={`${route.path}/cards`}>

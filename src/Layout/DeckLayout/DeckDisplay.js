@@ -8,8 +8,7 @@ function DeckDisplay({deck, deleteFunction=undefined, deleteCardFunction=undefin
 {
     const {url} = useRouteMatch()
     return (
-        
-        <>
+        <React.Fragment>
             <div>
                 <h2>{deck.name}</h2>
                 <p>{deck.description}</p>
@@ -26,7 +25,7 @@ function DeckDisplay({deck, deleteFunction=undefined, deleteCardFunction=undefin
 
             <CardList editRoute={url} cards={deck.cards} deleteFunction={deleteCardFunction}/>
 
-        </>
+        </React.Fragment>
 
     );
 }

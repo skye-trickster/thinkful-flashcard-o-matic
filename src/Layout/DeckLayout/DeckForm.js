@@ -1,6 +1,6 @@
 import React, {useState} from "react"
 
-function DeckForm({submitFunction, cancelFunction, data={"name":"", "description":""}, edit=false}) {
+function DeckForm( { submitFunction, cancelFunction, data={ "name":"", "description":"" } } ) {
     const [formData, setFormData] = useState(data)
     
     function updateData (event) {
