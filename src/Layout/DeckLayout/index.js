@@ -37,22 +37,19 @@ function DeckLayout() {
     }
 
     return (
-        <>
-            <Switch>
-                <Route path={`${route.url}/new`}>
-                    <CreateDeck createFunction={create} cancelFunction={cancel}/>
-                </Route>
+        <Switch>
+            <Route path={`${route.url}/new`}>
+                <CreateDeck createFunction={create} cancelFunction={cancel}/>
+            </Route>
 
-                <Route path={`${route.url}/:deckid`}>
-                    <Deck deleteCardFunction={deleteCard} deleteFunction={deleteDeck} cancelFunction={GoToDeck}/>
-                </Route>
+            <Route path={`${route.url}/:deckid`}>
+                <Deck deleteCardFunction={deleteCard} deleteFunction={deleteDeck} cancelFunction={GoToDeck}/>
+            </Route>
 
-                <Route>
-                    <NotFound />
-                </Route>
-            </Switch>
-
-        </>
+            <Route>
+                <NotFound />
+            </Route>
+        </Switch>
     )
 }
 

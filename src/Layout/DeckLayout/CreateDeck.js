@@ -2,14 +2,15 @@ import React from "react";
 
 import DeckNav from "./DeckNav"
 import DeckForm from "./DeckForm"
+import ContentLayer, { Heading } from "../Common/Content";
 
 function CreateDeck({createFunction, cancelFunction}) {
 
     return (
-        <div>
-            <DeckNav deck="Create New"/>
+        <ContentLayer nav={(<DeckNav deck="Create New" />)}>
+            <Heading title="Create Deck" />
             <DeckForm submitFunction={createFunction} cancelFunction={cancelFunction}/>
-        </div>
+        </ContentLayer>
     );
 }
 

@@ -2,15 +2,16 @@ import React from "react"
 import CardList from "./CardListDisplay"
 import {Study, Edit, Delete} from "../Common/Buttons"
 import {Link, useRouteMatch} from "react-router-dom"
+import ContentLayer from "../Common/Content"
 
 function DeckDisplay({deck, deleteFunction=undefined, deleteCardFunction=undefined})
 {
     const {url} = useRouteMatch()
     return (
         
-        <div>
+        <ContentLayer>
             <div>
-                <h3>{deck.name}</h3>
+                <h2>{deck.name}</h2>
                 <p>{deck.description}</p>
             </div>
             <div className="d-flex justify-content-between">
@@ -25,7 +26,7 @@ function DeckDisplay({deck, deleteFunction=undefined, deleteCardFunction=undefin
 
             <CardList editRoute={url} cards={deck.cards} deleteFunction={deleteCardFunction}/>
 
-        </div>
+        </ContentLayer>
 
     );
 }

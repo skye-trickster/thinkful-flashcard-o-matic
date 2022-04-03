@@ -31,9 +31,11 @@ function DeckListPreview({deckList = [], deleteFunction = (id) => {}}) {
         return <DeckPreview key={index} deck={deck} deleteFunction={deleteFunction} />
     });
 
+    if (!deckList.length) return "Loading.."
+
     return (
-        <div>
-            {!deckList.length ? "Loading..." : preview}
+        <div className="deck-list">
+            {preview}
         </div>
     )
 }

@@ -3,6 +3,7 @@ import {listDecks} from "../utils/api/index"
 import DeckListPreview from "./DeckListPreview"
 import {Link} from "react-router-dom"
 import {requestDeckDelete} from "./Common/Functions"
+import ContentLayer from "./Common/Content";
 function Home() {
     const [deckList, setDecks] = useState([])
 
@@ -35,11 +36,10 @@ function Home() {
     }
 
     return (
-        <>
+        <ContentLayer>
             <Link to="/decks/new" className="btn btn-secondary bi-plus-lg"> Create Deck</Link>
             <DeckListPreview deckList={deckList} deleteFunction={deleteDeck}/>
-        </>
-    )
-}
+        </ContentLayer>
+    )}
 
 export default Home;

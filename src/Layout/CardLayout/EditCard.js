@@ -1,4 +1,5 @@
 import React from "react";
+import ContentLayer from "../Common/Content";
 
 import CardForm from "./CardForm"
 
@@ -11,10 +12,10 @@ function EditCard({updateFunction, cancelFunction, card}) {
     }
     if (!Object.keys(card).length) return "Loading..." //don't load the form until the deck is loaded
     return (
-        <div>
+        <ContentLayer>
             <h1>Edit Card {card.id}</h1>
-            <CardForm data={card} submitFunction={submitHandler} cancelFunction={cancelFunction}/>
-        </div>
+            <CardForm data={card} submitFunction={submitHandler} cancelFunction={cancelFunction}/>            
+        </ContentLayer>
     );
 }
 

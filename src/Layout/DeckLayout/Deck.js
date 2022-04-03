@@ -70,6 +70,9 @@ function Deck({deleteFunction, cancelFunction, deleteCardFunction=undefined}) {
                 <Route path={`${route.path}/cards`}>
                     <CardLayout deck={deck} deckRefreshMethod={loadDeck} returnToDeck={returnToView} />
                 </Route>
+                <Route>
+                    <NotFound />
+                </Route>
             </Switch>
         </>
 
