@@ -15,44 +15,48 @@ function DeckLayout() {
     const Home = () => history.push(`/`)
 
     async function create(deck, redirect=true) {
-        const { id } = await createDeck(deck)
-        if (redirect) GoToDeck(id);
-    }
+        
+        const abortController = new AbortController()
 
-    async function cancel() {
-        if (window.confirm("Are you sure that you want to cancel creating this deck?"))
-            Home();
+        try {
+            const { id } = await createDeck(deck, abortController.signal)
+            if (redirect) GoToDeck(id);
+        } catch (error) {
+            if (error.name !== "AbortError") throw error
+        }
+
+        return () => { abortController.abort() }
+
     }
 
     async function deleteDeck(deckid, to) {
         const response = await requestDeckDelete(deckid)
-        if (response !== undefined)
-            history.push(to)
+
+        if (response !== undefined) history.push(to)
+        
         return response
     }
 
     async function deleteCard(cardid) {
         const response = await requestCardDelete(cardid)
+        
         return response
     }
 
     return (
-        <>
-            <Switch>
-                <Route path={`${route.url}/new`}>
-                    <CreateDeck createFunction={create} cancelFunction={cancel}/>
-                </Route>
+        <Switch>
+            <Route path={`${route.url}/new`}>
+                <CreateDeck createFunction={create} cancelFunction={Home}/>
+            </Route>
 
-                <Route path={`${route.url}/:deckid`}>
-                    <Deck deleteCardFunction={deleteCard} deleteFunction={deleteDeck} cancelFunction={GoToDeck}/>
-                </Route>
+            <Route path={`${route.url}/:deckid`}>
+                <Deck deleteCardFunction={deleteCard} deleteFunction={deleteDeck} cancelFunction={GoToDeck} homeFunction={Home}/>
+            </Route>
 
-                <Route>
-                    <NotFound />
-                </Route>
-            </Switch>
-
-        </>
+            <Route>
+                <NotFound />
+            </Route>
+        </Switch>
     )
 }
 

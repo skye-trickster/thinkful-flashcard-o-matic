@@ -80,7 +80,7 @@ function DeckNav ({deck=""}) {
     }
 
     return (
-        <div className="bg-light p-3 mb-2 d-flex">
+        <nav className="nav bg-light p-3 mb-2 d-flex">
             <NavLink name="Home" to="/" className="bi-house-door-fill"/> 
             {
                 getNav().map(({name, path, disabled}, index) => (
@@ -89,7 +89,7 @@ function DeckNav ({deck=""}) {
                         <NavLink name={name} to={path} disabled={disabled} />
                     </React.Fragment>
                 ))}
-        </div>
+        </nav>
     )
 }
 

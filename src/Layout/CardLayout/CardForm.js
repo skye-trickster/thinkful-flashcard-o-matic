@@ -21,22 +21,20 @@ function CardForm({submitFunction, cancelFunction, data={"front":"", "back":""}}
     }
 
     return (
-        <div>
-            <form onSubmit={submitHandler}>
-                <label className="d-block mb-3" htmlFor="front">
-                    <span className="d-block">Front</span>
-                    <textarea className="w-100" name="front" onChange={updateData} value={formData.front} required type="text" placeholder="Front side of card"/>
-                </label>
+        <form onSubmit={submitHandler}>
+            <label className="d-block mb-3" htmlFor="front">
+                <span className="d-block">Front</span>
+                <textarea className="w-100" name="front" onChange={updateData} value={formData.front} required type="text" placeholder="Front side of card"/>
+            </label>
 
-                <label className="d-block mb-3" htmlFor="back">
-                    <span className="d-block">Back</span>
-                    <textarea className="w-100" name="back" onChange={updateData} value={formData.back} required type="text" placeholder="Back Side of Card"/>
-                </label>
+            <label className="d-block mb-3" htmlFor="back">
+                <span className="d-block">Back</span>
+                <textarea className="w-100" name="back" onChange={updateData} value={formData.back} required type="text" placeholder="Back Side of Card"/>
+            </label>
 
-                <button onClick={cancelHandler} className="btn btn-secondary mr-3">Cancel</button>
-                <button type="submit" className="btn btn-primary">Save</button>
-            </form>
-        </div>
+            <button onClick={cancelHandler} className="btn btn-secondary mr-3">Cancel</button>
+            <button type="submit" className="btn btn-primary">Save</button>
+        </form>
     );
 }
 

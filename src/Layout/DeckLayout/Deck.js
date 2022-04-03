@@ -7,8 +7,10 @@ import DeckDisplay from "./DeckDisplay"
 import DeckNav from "./DeckNav"
 import DeckEdit from "./DeckEdit"
 import CardLayout from "../CardLayout"
+import StudyLayout from "../StudyLayout"
+import ContentLayer from "../Common/Content"
 
-function Deck({deleteFunction, cancelFunction, deleteCardFunction=undefined}) {
+function Deck({deleteFunction, cancelFunction, homeFunction, deleteCardFunction=undefined}) {
     const [deck, setDeck] = useState({})
 
     const [error, setError] = useState(null)
@@ -56,22 +58,31 @@ function Deck({deleteFunction, cancelFunction, deleteCardFunction=undefined}) {
         setDeck(deck)
     }
 
+    const nav = <DeckNav deck={deck.name}/>
+
     return (
-        <>
-            <DeckNav id={deck.id} deck={deck.name}/>
+        <ContentLayer nav={nav}>
             <Switch>
                 <Route exact path={route.path}>
                     <DeckDisplay deck={deck} deleteFunction={deleteFunction} deleteCardFunction={deleteCard} />
                 </Route>
+
+                <Route path={`${route.path}/study`}>
+                    <StudyLayout deck={deck} addCardLink={`${route.url}/cards/new`} endStudyFunction={homeFunction}/>
+                </Route>
+
                 <Route path={`${route.path}/edit`}>
-                    <DeckEdit updateDeck={update} returnToViewFunction={returnToView} deck={deck}/>
+                    <DeckEdit updateFunction={update} returnToViewFunction={returnToView} deck={deck}/>
                 </Route>
 
                 <Route path={`${route.path}/cards`}>
                     <CardLayout deck={deck} deckRefreshMethod={loadDeck} returnToDeck={returnToView} />
                 </Route>
+                <Route>
+                    <NotFound />
+                </Route>
             </Switch>
-        </>
+        </ContentLayer>
 
     );
 }

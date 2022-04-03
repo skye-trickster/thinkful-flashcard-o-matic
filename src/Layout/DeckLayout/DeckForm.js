@@ -1,6 +1,6 @@
 import React, {useState} from "react"
 
-function DeckForm({submitFunction, cancelFunction, data={"name":"", "description":""}, edit=false}) {
+function DeckForm( { submitFunction, cancelFunction, data={ "name":"", "description":"" } } ) {
     const [formData, setFormData] = useState(data)
     
     function updateData (event) {
@@ -21,23 +21,20 @@ function DeckForm({submitFunction, cancelFunction, data={"name":"", "description
     }
 
     return (
-        <div>
-            <h1>{edit ? "Edit Deck" : "Create Deck"}</h1>
-            <form onSubmit={submitHandler}>
-                <label className="d-block mb-3" htmlFor="name">
-                    <span className="d-block">Name</span>
-                    <input className="w-100" name="name" type="text" onChange={updateData} value={formData.name} required placeholder="Deck Name"/>
-                </label>
+        <form onSubmit={submitHandler}>
+            <label className="d-block mb-3" htmlFor="name">
+                <span className="d-block">Name</span>
+                <input className="w-100" name="name" type="text" onChange={updateData} value={formData.name} required placeholder="Deck Name"/>
+            </label>
 
-                <label className="d-block mb-3" htmlFor="description">
-                    <span className="d-block">Description</span>
-                    <textarea className="w-100" name="description" onChange={updateData} value={formData.description} type="text" placeholder="Brief description of the deck"/>
-                </label>
+            <label className="d-block mb-3" htmlFor="description">
+                <span className="d-block">Description</span>
+                <textarea className="w-100" name="description" onChange={updateData} value={formData.description} type="text" placeholder="Brief description of the deck"/>
+            </label>
 
-                <button onClick={cancelHandler} className="btn btn-secondary mr-3">Cancel</button>
-                <button type="submit" className="btn btn-primary">Submit</button>
-            </form>
-        </div>
+            <button onClick={cancelHandler} className="btn btn-secondary mr-3">Cancel</button>
+            <button type="submit" className="btn btn-primary">Submit</button>
+        </form>
     );
 }
 

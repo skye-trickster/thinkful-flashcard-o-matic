@@ -10,19 +10,38 @@ function CardLayout({deck, returnToDeck, deckRefreshMethod}) {
 
     const {url} = useRouteMatch()
 
-    
-    async function create(card, redirect=true)
-    {
-        console.log(card)
-        await createCard(deck.id, card)
+    function refresh() {
         deckRefreshMethod()
-        if (redirect) returnToDeck()
+        returnToDeck()
+    }
+    
+    async function create(card)
+    {
+        const abortController = new AbortController()
+        
+        try {
+            await createCard(deck.id, card, abortController.signal)
+            refresh()
+        } catch(error) {
+            if (error.name !== "AbortError") throw error
+        }
+
+        return () => { abortController.abort() }
     }
 
     async function update(card) {
-        await updateCard(card)
-        deckRefreshMethod()
-        returnToDeck()
+
+        const abortController = new AbortController()
+        
+        try {
+            await updateCard(card, abortController.signal)
+            refresh()
+        } catch(error) {
+            console.log("error!", error)
+            if (error.name !== "AbortError") throw error
+        }
+
+        return () => { abortController.abort() }
     }
 
     return (

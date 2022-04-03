@@ -1,4 +1,6 @@
 import React from "react";
+import ContentLayer from "../Common/Content";
+import Heading from "../Common/Heading";
 
 import CardForm from "./CardForm"
 
@@ -6,17 +8,16 @@ function CreateCard({createFunction, cancelFunction, deck}) {
 
     function submitHandler(card)
     {
-        console.log(deck.id)
         createFunction({
             ...card,
             "deckId" : deck.id
         })
     }
     return (
-        <div>
-            <h1>{deck.name}: Add Card</h1>
+        <ContentLayer>
+            <Heading title={`${deck.name}: Add Card`} />
             <CardForm submitFunction={submitHandler} cancelFunction={cancelFunction}/>
-        </div>
+        </ContentLayer>
     );
 }
 
