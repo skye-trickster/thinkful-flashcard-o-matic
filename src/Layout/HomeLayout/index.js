@@ -18,12 +18,10 @@ function Home() {
             try {
                 const decks = await listDecks(abortC.signal);
                 setDecks(decks)
-                console.log("decks set")
             }
             catch (error) {
                 if (error.name !== "AbortError")
                     throw error
-                console.log("Aborting DeckList")
             }
         }
         loadDecks()

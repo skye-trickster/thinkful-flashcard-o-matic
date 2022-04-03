@@ -8,7 +8,6 @@ function CreateCard({createFunction, cancelFunction, deck}) {
 
     function submitHandler(card)
     {
-        console.log(deck.id)
         createFunction({
             ...card,
             "deckId" : deck.id

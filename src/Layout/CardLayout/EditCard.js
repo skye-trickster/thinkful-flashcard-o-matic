@@ -5,16 +5,12 @@ import CardForm from "./CardForm"
 
 function EditCard({updateFunction, cancelFunction, card}) {
 
-    async function submitHandler(card)
-    {
-        await updateFunction(card)
-        cancelFunction()
-    }
-    if (!Object.keys(card).length) return "Loading..." //don't load the form until the deck is loaded
+    if (!Object.keys(card).length) return "Loading..." //don't load the form until the card is loaded
+
     return (
         <ContentLayer>
             <Heading title={`Edit Card ${card.id}`} />
-            <CardForm data={card} submitFunction={submitHandler} cancelFunction={cancelFunction}/>            
+            <CardForm data={card} submitFunction={updateFunction} cancelFunction={cancelFunction}/>            
         </ContentLayer>
     );
 }

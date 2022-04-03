@@ -4,10 +4,10 @@ import { readCard } from "../../utils/api";
 import NotFound from "../NotFound";
 import EditCard from "./EditCard";
 
-function Card({updateCardMethod=undefined, returnToDeckFunction=undefined}) {
+function Card({ updateCardMethod, returnToDeckFunction }) {
     const [card, setCard] = useState({})
     const {url} = useRouteMatch();
-    const {cardid} = useParams();
+    const { cardid } = useParams();
 
     useEffect(() => {
         setCard({})
@@ -25,15 +25,10 @@ function Card({updateCardMethod=undefined, returnToDeckFunction=undefined}) {
         loadCard();
     }, [cardid])
 
-    function returnToDeck() {
-        if (returnToDeckFunction)
-            returnToDeckFunction()
-    }
-
     return (
         <Switch>
             <Route path={`${url}/edit`}>
-                <EditCard updateFunction={updateCardMethod} cancelFunction={returnToDeck} card={card}/>
+                <EditCard updateFunction={updateCardMethod} cancelFunction={returnToDeckFunction} card={card}/>
             </Route>
             <Route>
                 <NotFound />
