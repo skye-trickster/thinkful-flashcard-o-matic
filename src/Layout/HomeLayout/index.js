@@ -1,9 +1,13 @@
 import React, {useEffect, useState} from "react";
-import {listDecks} from "../utils/api/index"
-import DeckListPreview from "./DeckListPreview"
 import {Link} from "react-router-dom"
-import {requestDeckDelete} from "./Common/Functions"
-import ContentLayer from "./Common/Content";
+
+import {listDecks} from "../../utils/api"
+
+import DeckListPreview from "./DeckListPreview"
+import {requestDeckDelete} from "../Common/Functions"
+import ContentLayer from "../Common/Content";
+
+
 function Home() {
     const [deckList, setDecks] = useState([])
 
@@ -28,7 +32,9 @@ function Home() {
 
     async function deleteDeck(deckId) {
         const response = await requestDeckDelete(deckId)
+
         if (response === undefined) return 
+
         const deckListTemp = deckList.filter((deckItem) => deckItem.id !== deckId)
         setDecks(deckListTemp)
 
