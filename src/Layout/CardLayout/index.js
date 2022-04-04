@@ -1,28 +1,27 @@
 import React from "react"
-import {Switch, Route, useRouteMatch} from "react-router-dom"
+import { Switch, Route, useRouteMatch } from "react-router-dom"
 import { createCard, updateCard } from "../../utils/api"
 import NotFound from "../NotFound"
 import Card from "./Card"
 
 import CreateCard from "./CreateCard"
 
-function CardLayout({deck, returnToDeck, deckRefreshMethod}) {
+function CardLayout({ deck, returnToDeck, deckRefreshMethod }) {
 
-    const {url} = useRouteMatch()
+    const { url } = useRouteMatch()
 
     function refresh() {
         deckRefreshMethod()
         returnToDeck()
     }
-    
-    async function create(card)
-    {
+
+    async function create(card) {
         const abortController = new AbortController()
-        
+
         try {
             await createCard(deck.id, card, abortController.signal)
             refresh()
-        } catch(error) {
+        } catch (error) {
             if (error.name !== "AbortError") throw error
         }
 
@@ -32,11 +31,11 @@ function CardLayout({deck, returnToDeck, deckRefreshMethod}) {
     async function update(card) {
 
         const abortController = new AbortController()
-        
+
         try {
             await updateCard(card, abortController.signal)
             refresh()
-        } catch(error) {
+        } catch (error) {
             console.log("error!", error)
             if (error.name !== "AbortError") throw error
         }
@@ -47,7 +46,7 @@ function CardLayout({deck, returnToDeck, deckRefreshMethod}) {
     return (
         <Switch>
             <Route path={`${url}/new`}>
-                <CreateCard deck={deck} createFunction={create} cancelFunction={returnToDeck}/>
+                <CreateCard deck={deck} createFunction={create} cancelFunction={returnToDeck} />
             </Route>
 
             <Route path={`${url}/:cardid`}>

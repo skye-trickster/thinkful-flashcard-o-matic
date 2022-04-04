@@ -1,14 +1,27 @@
 import React from "react"
 import CardList from "./CardListDisplay"
-import {Study, Edit, Delete} from "../Common/Buttons"
-import {Link, useRouteMatch} from "react-router-dom"
-//import ContentLayer from "../Common/Content"
+import { Study, Edit, Delete } from "../Common/Buttons"
+import { Link, useRouteMatch } from "react-router-dom"
 
-function DeckDisplay({deck, deleteFunction=undefined, deleteCardFunction=undefined})
-{
-    const {url} = useRouteMatch()
+/**
+ * Component used for dispalying a deck
+ * @param {object} paramList
+ * 
+ * @param {object} paramList.deck
+ * The current deck to display
+ * 
+ * @param {function} paramList.deleteFunction
+ * The function used to delete the deck
+ * 
+ * @param {function} paramList.deleteCardFunction
+ * The function used to delete a card
+ * 
+ * @returns A component used to display a deck
+ */
+function DeckDisplay({ deck, deleteFunction, deleteCardFunction }) {
+    const { url } = useRouteMatch()
     return (
-        <React.Fragment>
+        <div className="deck-display">
             <div>
                 <h2>{deck.name}</h2>
                 <p>{deck.description}</p>
@@ -19,13 +32,13 @@ function DeckDisplay({deck, deleteFunction=undefined, deleteCardFunction=undefin
                     <Study to={`${url}/study`} className="mr-2" />
                     <Link to={`${url}/cards/new`} className="btn btn-primary bi-plus"> Add Cards</Link>
                 </div>
-                <Delete deleteFunction={deleteFunction} to="/" id={deck.id}/>
+                <Delete deleteFunction={deleteFunction} to="/" id={deck.id} />
 
             </div>
 
-            <CardList editRoute={url} cards={deck.cards} deleteFunction={deleteCardFunction}/>
+            <CardList editRoute={url} cards={deck.cards} deleteFunction={deleteCardFunction} />
 
-        </React.Fragment>
+        </div>
 
     );
 }

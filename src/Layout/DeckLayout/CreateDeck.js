@@ -5,14 +5,14 @@ import DeckForm from "./DeckForm"
 import ContentLayer from "../Common/Content";
 import Heading from "../Common/Heading";
 
-function CreateDeck({createFunction, cancelFunction}) {
+function CreateDeck({ createFunction, cancelFunction }) {
 
     const nav = <DeckNav deck="Create New" />
 
     return (
         <ContentLayer nav={nav}>
             <Heading title="Create Deck" />
-            <DeckForm submitFunction={createFunction} cancelFunction={cancelFunction}/>
+            <DeckForm submitFunction={createFunction} cancelFunction={cancelFunction} />
         </ContentLayer>
     );
 }
