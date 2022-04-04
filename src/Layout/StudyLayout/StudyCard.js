@@ -6,7 +6,7 @@ function StudyCard({card = {}, nextFunction, cardIndex, cardTotal, restartFuncti
 
     const flip = () => setBackView(!checkBack)
 
-    useEffect(() => { setBackView(false) }, [card])
+    useEffect(() => { setBackView(false) }, [card, cardIndex])
 
     function nextCardHandler()
     {
