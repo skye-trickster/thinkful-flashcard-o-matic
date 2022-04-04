@@ -1,14 +1,15 @@
-import React, {useEffect, useState} from "react";
-import {Link} from "react-router-dom"
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom"
 
-import {listDecks} from "../../utils/api"
+import { listDecks } from "../../utils/api"
 
 import DeckListPreview from "./DeckListPreview"
-import {requestDeckDelete} from "../Common/Functions"
+import { requestDeckDelete } from "../Common/Functions"
 import ContentLayer from "../Common/Content";
 
-
+/** Home Page. */
 function Home() {
+
     const [deckList, setDecks] = useState([])
 
     useEffect(() => {
@@ -26,12 +27,12 @@ function Home() {
         }
         loadDecks()
         return () => abortC.abort()
-    }, [])
+    }, []) // load decks when the page is loaded 
 
     async function deleteDeck(deckId) {
         const response = await requestDeckDelete(deckId)
 
-        if (response === undefined) return 
+        if (response === undefined) return
 
         const deckListTemp = deckList.filter((deckItem) => deckItem.id !== deckId)
         setDecks(deckListTemp)
@@ -42,8 +43,9 @@ function Home() {
     return (
         <ContentLayer>
             <Link to="/decks/new" className="btn btn-secondary bi-plus-lg"> Create Deck</Link>
-            <DeckListPreview deckList={deckList} deleteFunction={deleteDeck}/>
+            <DeckListPreview deckList={deckList} deleteFunction={deleteDeck} />
         </ContentLayer>
-    )}
+    )
+}
 
 export default Home;
