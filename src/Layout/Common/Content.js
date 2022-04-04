@@ -7,15 +7,15 @@ import React from "react"
  * 
  * @param {React.ReactNode} [params.nav=null]
  */
-function ContentLayer({children, nav=null}) {
+function ContentLayer({ children, nav = null }) {
 
     return (
-    <React.Fragment>
-        { nav }
-        <div className="content">
-            { children }
-        </div>
-    </React.Fragment>
+        <React.Fragment>
+            {nav}
+            <div className="content">
+                {children}
+            </div>
+        </React.Fragment>
 
     )
 }

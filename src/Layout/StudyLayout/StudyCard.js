@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react"
+import React, { useState, useEffect } from "react"
 
 /**
  * A study card block used for the study session
@@ -24,16 +24,15 @@ import React, {useState, useEffect} from "react"
  * 
  * @returns A wrapper of the card to use to study
  */
-function StudyCard({card = {}, nextFunction, cardIndex, cardTotal, restartFunction, endSessionFunction}) {
-    const {front, back} = card;
-    const [checkBack, setBackView] = useState(false) 
+function StudyCard({ card = {}, nextFunction, cardIndex, cardTotal, restartFunction, endSessionFunction }) {
+    const { front, back } = card;
+    const [checkBack, setBackView] = useState(false)
 
     const flip = () => setBackView(!checkBack)
 
     useEffect(() => { setBackView(false) }, [card, cardIndex]) //flip to front when card or card index is updated.
 
-    function nextCardHandler()
-    {
+    function nextCardHandler() {
         if (cardIndex < cardTotal) return nextFunction()
 
         if (window.confirm("Restart cards?\n\nClick 'cancel' to return to the home page.")) restartFunction()
@@ -46,7 +45,7 @@ function StudyCard({card = {}, nextFunction, cardIndex, cardTotal, restartFuncti
             <p>{checkBack ? back : front}</p>
             <div>
                 <button onClick={flip} className="btn btn-secondary mr-2">Flip</button>
-                { checkBack ?
+                {checkBack ?
                     <button onClick={nextCardHandler} className="btn btn-primary">Next</button> : // show next button only when it's on the back
                     null
                 }

@@ -2,7 +2,20 @@ import React from "react";
 
 import DeckPreview from "./DeckPreview"
 
-function DeckListPreview({deckList = [], deleteFunction = (id) => {}}) {
+/**
+ * Deck list preview component
+ * @param {object} paramList 
+ * List of parameters
+ * 
+ * @param {Array} paramList.deckList 
+ * List of available decks
+ * 
+ * @param {function} paramList.deleteFunction
+ * Function to call when deleting a list
+ * 
+ * @returns div element with list of Deck Preview components
+ */
+function DeckListPreview({ deckList = [], deleteFunction }) {
 
     if (!deckList.length) return "Loading.."
 
@@ -12,7 +25,7 @@ function DeckListPreview({deckList = [], deleteFunction = (id) => {}}) {
 
     return (
         <div className="deck-list">
-            { preview }
+            {preview}
         </div>
     )
 }
