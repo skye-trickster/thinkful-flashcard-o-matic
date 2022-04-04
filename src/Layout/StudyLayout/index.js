@@ -8,12 +8,16 @@ import RandomButton from "./RandomButton"
 import StudyCard from "./StudyCard"
 
 function StudyLayout({deck, addCardLink="/", endStudyFunction}) {
+
+    /** @typedef {Object} cards - The list of cards in the study session */
     const {cards} = deck // cards used in the study session
     const [index, setIndex] = useState(0)
     const [shuffle, setShuffle] = useState(false)
-    const [reference, setReference] = useState([])
 
-    const getCard = () => cards[reference[index]] //gets the card based on the reference index
+    /** @typedef {Array} reference - the list of references indecies for cards */
+    const [reference, setReference] = useState([]) 
+
+    const getCard = () => cards[reference[index]] //returns the card based on the reference index
 
     const validCardLength = () => cards && cards.length > 2 // check if the card is of a valid length
     
