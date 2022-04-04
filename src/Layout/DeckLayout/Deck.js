@@ -1,6 +1,6 @@
-import React, {useState, useEffect} from "react"
-import {useParams, Switch, Route, useRouteMatch} from "react-router-dom"
-import {readDeck, updateDeck} from "../../utils/api"
+import React, { useState, useEffect } from "react"
+import { useParams, Switch, Route, useRouteMatch } from "react-router-dom"
+import { readDeck, updateDeck } from "../../utils/api"
 
 import NotFound from "../NotFound"
 import DeckDisplay from "./DeckDisplay"
@@ -10,12 +10,12 @@ import CardLayout from "../CardLayout"
 import StudyLayout from "../StudyLayout"
 import ContentLayer from "../Common/Content"
 
-function Deck({deleteFunction, cancelFunction, homeFunction, deleteCardFunction=undefined}) {
+function Deck({ deleteFunction, cancelFunction, homeFunction, deleteCardFunction = undefined }) {
     const [deck, setDeck] = useState({})
 
     const [error, setError] = useState(null)
 
-    const {deckid} = useParams();
+    const { deckid } = useParams();
 
     const route = useRouteMatch()
 
@@ -32,17 +32,17 @@ function Deck({deleteFunction, cancelFunction, homeFunction, deleteCardFunction=
     }
 
     useEffect(() => {
-        
+
         setDeck({})
-        
+
         const abortController = new AbortController()
         loadDeck(abortController.signal)
 
-        return () => {abortController.abort()}
+        return () => { abortController.abort() }
     }, [deckid])
 
-    if (error || ! deck) { return <NotFound /> }
-    
+    if (error || !deck) { return <NotFound /> }
+
     const returnToView = () => cancelFunction(deckid)
 
     async function deleteCard(cardid) {
@@ -58,7 +58,7 @@ function Deck({deleteFunction, cancelFunction, homeFunction, deleteCardFunction=
         setDeck(deck)
     }
 
-    const nav = <DeckNav deck={deck.name}/>
+    const nav = <DeckNav deck={deck.name} />
 
     return (
         <ContentLayer nav={nav}>
@@ -68,11 +68,11 @@ function Deck({deleteFunction, cancelFunction, homeFunction, deleteCardFunction=
                 </Route>
 
                 <Route path={`${route.path}/study`}>
-                    <StudyLayout deck={deck} addCardLink={`${route.url}/cards/new`} endStudyFunction={homeFunction}/>
+                    <StudyLayout deck={deck} addCardLink={`${route.url}/cards/new`} endStudyFunction={homeFunction} />
                 </Route>
 
                 <Route path={`${route.path}/edit`}>
-                    <DeckEdit updateFunction={update} returnToViewFunction={returnToView} deck={deck}/>
+                    <DeckEdit updateFunction={update} returnToViewFunction={returnToView} deck={deck} />
                 </Route>
 
                 <Route path={`${route.path}/cards`}>

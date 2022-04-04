@@ -1,7 +1,7 @@
 import React from "react"
 import { Edit, Delete } from "../Common/Buttons"
 
-function CardDisplay({ card = {}, routeBase="", deleteFunction }) {
+function CardDisplay({ card = {}, routeBase = "", deleteFunction }) {
 
     function deleteHandler() {
         if (!card.id) return
@@ -17,7 +17,7 @@ function CardDisplay({ card = {}, routeBase="", deleteFunction }) {
                 <p className="text-secondary col-6">{card.back}</p>
             </div>
             <div className="d-flex justify-content-end p-2">
-                <Edit to={routeBase === "" ? "/" : `${routeBase}/cards/${card.id}/edit`} className="m-2"/>
+                <Edit to={routeBase === "" ? "/" : `${routeBase}/cards/${card.id}/edit`} className="m-2" />
                 <Delete deleteFunction={deleteHandler} className="m-2" />
             </div>
         </div>
