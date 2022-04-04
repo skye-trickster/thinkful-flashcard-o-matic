@@ -4,19 +4,18 @@ import Heading from "../Common/Heading";
 
 import CardForm from "./CardForm"
 
-function CreateCard({createFunction, cancelFunction, deck}) {
+function CreateCard({ createFunction, cancelFunction, deck }) {
 
-    function submitHandler(card)
-    {
+    function submitHandler(card) {
         createFunction({
             ...card,
-            "deckId" : deck.id
+            "deckId": deck.id
         })
     }
     return (
         <ContentLayer>
             <Heading title={`${deck.name}: Add Card`} />
-            <CardForm submitFunction={submitHandler} cancelFunction={cancelFunction}/>
+            <CardForm submitFunction={submitHandler} cancelFunction={cancelFunction} />
         </ContentLayer>
     );
 }
