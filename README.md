@@ -24,6 +24,10 @@
     4. [Edit Card](#edit-card)
 8. [Additional Passing Requirements](#additional-passing-requirements)
 
+## Disclaimer!
+
+This README is a copy of given instructions for developing the Flashcard-o-matic app. Thus, this will have specific instructions of what requirements were to be utilized to complete the project.
+
 ## Introduction
 
 A local school has decided to put together a flashcard application, Flashcard-o-matic, to help their students study online. Teachers will use this application to create decks of flashcards for the subjects they teach, and students will study the decks. The school needs you to build the application that the students and teachers will use.
