@@ -36,9 +36,11 @@ function Deck({ deleteFunction, cancelFunction, homeFunction, deleteCardFunction
         setDeck({})
 
         const abortController = new AbortController()
+
         loadDeck(abortController.signal)
 
         return () => { abortController.abort() }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [deckid])
 
     if (error || !deck) { return <NotFound /> }
