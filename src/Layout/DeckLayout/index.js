@@ -19,19 +19,13 @@ function DeckLayout() {
     /**
      * Creates a deck and redirects to that DeckDisplay component
      */
-    async function create(deck) {
-
+    function create(deck) {
         const abortController = new AbortController()
 
-        try {
-            const { id } = await createDeck(deck, abortController.signal)
-            GoToDeck(id)
-        } catch (error) {
-            if (error.name !== "AbortError") throw error
-        }
-
-        return () => { abortController.abort() }
-
+        return createDeck(deck, abortController.signal)
+            .then(({ id }) => GoToDeck(id))
+            .catch((error) => { if (error.name !== "AbortError") throw error; })
+            .finally(() => abortController.abort)
     }
 
     /** Deletes Deck and redirects to a given page */
