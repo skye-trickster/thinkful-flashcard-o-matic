@@ -3,9 +3,10 @@ import { Link } from "react-router-dom"
 
 import { listDecks } from "../../utils/api"
 
-import DeckListPreview from "./DeckListPreview"
 import { requestDeckDelete } from "../Common/Functions"
 import ContentLayer from "../Common/Content";
+
+import DeckPreview from "./DeckPreview";
 
 /** Home Page. */
 function Home() {
@@ -15,21 +16,17 @@ function Home() {
     useEffect(() => {
         const abortC = new AbortController()
 
-        async function loadDecks() {
-            try {
-                const decks = await listDecks(abortC.signal);
-                setDecks(decks)
-            }
-            catch (error) {
+        listDecks(abortC.signal)
+            .then(setDecks)
+            .catch((error) => {
                 if (error.name !== "AbortError")
                     throw error
-            }
-        }
-        loadDecks()
+            })
+
         return () => abortC.abort()
     }, []) // load decks when the page is loaded 
 
-    async function deleteDeck(deckId) {
+    const deleteDeck = async (deckId) => {
         const response = await requestDeckDelete(deckId)
 
         if (response === undefined) return
@@ -43,7 +40,10 @@ function Home() {
     return (
         <ContentLayer>
             <Link to="/decks/new" className="btn btn-secondary bi-plus-lg"> Create Deck</Link>
-            <DeckListPreview deckList={deckList} deleteFunction={deleteDeck} />
+            {deckList.length
+                ? deckList.map((deck) => <DeckPreview key={deck.id} deck={deck} deleteFunction={deleteDeck} />)
+                : "Loading..."}
+
         </ContentLayer>
     )
 }

@@ -1,7 +1,7 @@
 import React from "react"
-import CardList from "./CardListDisplay"
 import { Study, Edit, Delete } from "../Common/Buttons"
 import { Link, useRouteMatch } from "react-router-dom"
+import Card from "./CardDisplay"
 
 /**
  * Component used for dispalying a deck
@@ -20,6 +20,7 @@ import { Link, useRouteMatch } from "react-router-dom"
  */
 function DeckDisplay({ deck, deleteFunction, deleteCardFunction }) {
     const { url } = useRouteMatch()
+    console.log(deck.cards)
     return (
         <div className="deck-display">
             <div>
@@ -36,7 +37,16 @@ function DeckDisplay({ deck, deleteFunction, deleteCardFunction }) {
 
             </div>
 
-            <CardList editRoute={url} cards={deck.cards} deleteFunction={deleteCardFunction} />
+            <div className="mt-3">
+                <h2>Cards</h2>
+                <div className="card mt-2">
+                    {
+                        deck.cards
+                            ? deck.cards.map((card, index) => <Card deleteFunction={deleteFunction} key={index} card={card} routeBase={url} />)
+                            : "Loading..."
+                    }
+                </div>
+            </div>
 
         </div>
 

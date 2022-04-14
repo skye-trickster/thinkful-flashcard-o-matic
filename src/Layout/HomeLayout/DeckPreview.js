@@ -3,7 +3,7 @@ import React from "react"
 import { View, Study, Delete } from "../Common/Buttons"
 
 /**
- * Deck preview component
+ * Preview, and edit a deck
  * @param {object} paramList 
  * List of parameters
  * 

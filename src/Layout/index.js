@@ -4,29 +4,35 @@ import Header from "./Header";
 import NotFound from "./NotFound";
 import Home from "./HomeLayout"
 import DeckLayout from "./DeckLayout";
+import Footer from "./Footer"
 
 function Layout() {
   return (
-    <React.Fragment>
-      <Header />
-      <div className="container">
-        <Switch>
+    <div className="content d-flex flex-column justify-content-between">
+      <div>
+        <Header />
+        <div className="container">
+          <Switch>
 
-          <Route path="/decks">
-            <DeckLayout />
-          </Route>
+            <Route path="/decks">
+              <DeckLayout />
+            </Route>
 
-          <Route exact path="/">
-            <Home />
-          </Route>
+            <Route exact path="/">
+              <Home />
+            </Route>
 
-          <Route>
-            <NotFound />
-          </Route>
+            <Route>
+              <NotFound />
+            </Route>
 
-        </Switch>
+          </Switch>
+        </div>
       </div>
-    </React.Fragment>
+
+      <Footer />
+
+    </div>
   );
 }
 

@@ -62,6 +62,7 @@ function StudyLayout({ deck, addCardLink = "/", endStudyFunction }) {
         setShuffle(!shuffle)
     }
 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     useEffect(restart, [shuffle, cards])
 
     if (Object.keys(deck).length === 0) return "Loading Deck..."
