@@ -19,14 +19,14 @@ function Home() {
         listDecks(abortC.signal)
             .then(setDecks)
             .catch((error) => {
-                if (error.name != "AbortError")
+                if (error.name !== "AbortError")
                     throw error
             })
 
         return () => abortC.abort()
     }, []) // load decks when the page is loaded 
 
-    async function deleteDeck(deckId) {
+    const deleteDeck = async (deckId) => {
         const response = await requestDeckDelete(deckId)
 
         if (response === undefined) return
@@ -40,7 +40,9 @@ function Home() {
     return (
         <ContentLayer>
             <Link to="/decks/new" className="btn btn-secondary bi-plus-lg"> Create Deck</Link>
-            {deckList.length && deckList.map((deck) => <DeckPreview key={deck.id} deck={deck} deleteFunction={deleteDeck} />)}
+            {deckList.length
+                ? deckList.map((deck) => <DeckPreview key={deck.id} deck={deck} deleteFunction={deleteDeck} />)
+                : "Loading..."}
 
         </ContentLayer>
     )

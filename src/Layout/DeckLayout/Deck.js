@@ -19,18 +19,6 @@ function Deck({ deleteFunction, cancelFunction, homeFunction, deleteCardFunction
 
     const route = useRouteMatch()
 
-    async function loadDeck(signal) {
-        try {
-            if (deckid !== null) {
-                const _deck = await readDeck(deckid, signal)
-                setDeck(_deck)
-            }
-        } catch (_error) {
-            if (_error.name !== "AbortError")
-                setError(_error)
-        }
-    }
-
     useEffect(() => {
 
         setDeck({})
@@ -43,23 +31,28 @@ function Deck({ deleteFunction, cancelFunction, homeFunction, deleteCardFunction
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [deckid])
 
-    if (error || !deck) { return <NotFound /> }
+    const loadDeck = (signal) => {
+
+        if (deckid !== null) {
+            readDeck(deckid, signal)
+                .then(setDeck)
+                .catch((error) => { if (error.name !== "AbortError") setError(error) })
+        }
+    }
 
     const returnToView = () => cancelFunction(deckid)
 
-    async function deleteCard(cardid) {
+    const deleteCard = (cardid) => {
         if (!deleteCardFunction) return
 
-        const response = await deleteCardFunction(cardid)
-        if (response !== undefined)
-            loadDeck()
+        deleteCardFunction(cardid).then((response) => { if (response) loadDeck() })
     }
 
-    async function update(deck) {
-        await updateDeck(deck)
-        setDeck(deck)
+    const update = (deck) => {
+        updateDeck(deck).then(() => setDeck(Deck))
     }
 
+    if (error || !deck) { return <NotFound /> }
     const nav = <DeckNav deck={deck.name} />
 
     return (

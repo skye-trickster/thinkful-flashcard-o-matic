@@ -19,7 +19,7 @@ function DeckLayout() {
     /**
      * Creates a deck and redirects to that DeckDisplay component
      */
-    function create(deck) {
+    const create = (deck) => {
         const abortController = new AbortController()
 
         return createDeck(deck, abortController.signal)
@@ -29,19 +29,9 @@ function DeckLayout() {
     }
 
     /** Deletes Deck and redirects to a given page */
-    async function deleteDeck(deckid, to) {
-        const response = await requestDeckDelete(deckid)
-
-        if (response !== undefined) history.push(to)
-
-        return response
-    }
-
-    /** Deletes a card given the card ID */
-    async function deleteCard(cardId) {
-        const response = await requestCardDelete(cardId)
-
-        return response
+    const deleteDeck = (deckid, to) => {
+        return requestDeckDelete(deckid)
+            .then((response) => { if (response !== undefined) history.push(to) })
     }
 
     return (
@@ -52,7 +42,7 @@ function DeckLayout() {
             </Route>
 
             <Route path={`${route.url}/:deckid`}>
-                <Deck deleteCardFunction={deleteCard} deleteFunction={deleteDeck} cancelFunction={GoToDeck} homeFunction={Home} />
+                <Deck deleteCardFunction={requestCardDelete} deleteFunction={deleteDeck} cancelFunction={GoToDeck} homeFunction={Home} />
             </Route>
 
             <Route>
